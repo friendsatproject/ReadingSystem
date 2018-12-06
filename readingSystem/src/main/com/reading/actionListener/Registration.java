@@ -1,4 +1,4 @@
-package main.com.reading.actionListener;
+package com.reading.actionListener;
 
 public class Registration {
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.com.reading.frontEnd;
+package com.reading.frontEnd;
 
 import java.awt.Color;
 
