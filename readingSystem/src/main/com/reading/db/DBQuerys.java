@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 
 public abstract class DBQuerys {
 	HashMap hm=new HashMap();
+	static String primaryKey="";
 	Connection con=null;
 	String tableName;
 	public void set(HashMap hm,String tableName,Connection con){
@@ -39,15 +40,35 @@ public abstract class DBQuerys {
 		}
 		return false;
 	}
-	public boolean update() {
+	public boolean update(LinkedHashMap<String,Object> lhm) {
 		StringBuilder sql=new StringBuilder("update table "+tableName+" set");
+		primaryKey=(String) lhm.get("id");
+		StringBuilder column=new StringBuilder();
+		String prefix="";
+		for(String key:lhm.keySet()) {
+			column.append(prefix+key+"+=");
+			column.append("'"+lhm.get(key)+"'");
+			prefix=",";
+		}
+		sql.append(" where id='"+primaryKey+";");
+		
+		
 //		update table tname set columnname="" where columnname="" 
 		return false;
 	}
-	public boolean delete() {
+	public boolean delete(LinkedHashMap<String,Object> lhm) {
+		primaryKey=(String) lhm.get("id");
+		StringBuilder sql=new StringBuilder("delete * from "+tableName+" where id='"+primaryKey+"'");
+		
+		
 		return false;
 	}
 	public boolean createTable() {
+		StringBuilder sql=new StringBuilder("create teble "+tableName+"(");
+		StringBuilder column=new StringBuilder();
+		StringBuilder values=new StringBuilder();
+		column.append("");
+		
 		return false;
 	}
 
