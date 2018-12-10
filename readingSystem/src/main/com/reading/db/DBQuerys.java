@@ -2,11 +2,12 @@ package com.reading.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public abstract class DBQuerys {
-	HashMap hm=new HashMap();
+	HashMap<String,String> hm=new HashMap<String,String>();
 	static String primaryKey="";
 	Connection con=null;
 	String tableName;
@@ -64,12 +65,19 @@ public abstract class DBQuerys {
 		return false;
 	}
 	public boolean createTable() {
-		StringBuilder sql=new StringBuilder("create teble "+tableName+"(");
+		try{
+                    StringBuilder sql=new StringBuilder("create teble "+tableName+"(");
 		StringBuilder column=new StringBuilder();
-		StringBuilder values=new StringBuilder();
-		column.append("");
-		
+                for(String key:hm.keySet()){
+                    column.append(key+" "+hm.get(key)+",");
+                }
+		column.append(")");
+                sql.append(column.toString());
+		Statement stmt=this.con.createStatement();
+                stmt.executeQuery(sql.toString());
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
 		return false;
 	}
-
 }

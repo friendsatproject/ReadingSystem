@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.reading.frontEnd;
+package com.reading.ui;
 
 import java.awt.Color;
 
@@ -50,7 +50,7 @@ public class LogIn extends javax.swing.JFrame {
 
         jLabel1.setText("User Name");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/secrecy-icon.png"))); // NOI18N
+//        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/secrecy-icon.png"))); // NOI18N
         jButton1.setText("LogIn");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
