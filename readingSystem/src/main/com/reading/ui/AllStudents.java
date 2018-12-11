@@ -1,8 +1,13 @@
 package com.reading.ui;
 
 
-import javax.swing.JInternalFrame;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import javax.swing.JInternalFrame;
+import javax.swing.table.DefaultTableModel;
+
+import com.reading.db.Student;
 import com.reading.operaton.FormatFrame;
 
 /*
@@ -17,6 +22,7 @@ import com.reading.operaton.FormatFrame;
 public class AllStudents extends javax.swing.JInternalFrame {
 JInternalFrame frame;
 Home home;
+ResultSet rs=null;
     /**
      * Creates new form AllStudents
      */
@@ -25,9 +31,27 @@ Home home;
         initComponents();
         FormatFrame ff = new FormatFrame(this);
         ff.formatTable(table);
+        try {
+			setTabel();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
     }
-
+    public void setTabel() throws SQLException {
+    	
+    	rs=new Student().getData();
+    	DefaultTableModel model = (DefaultTableModel)table.getModel();
+    	while(rs.next()) {
+    		model.addRow(new Object[] {
+        			rs.getString(1),
+        			rs.getString(2)
+        	});
+    	}
+    	
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -2,27 +2,30 @@ package com.reading.hm;
 
 import java.util.LinkedHashMap;
 
+import com.reading.db.Student;
 import com.reading.ui.NewAdmission;
 
 public class NewAdmissionHM {
 
 	NewAdmission na;
 	public NewAdmissionHM(NewAdmission na) {
-		LinkedHashMap<String,String> props = new LinkedHashMap<String,String>();
+		LinkedHashMap<String,Object> props = new LinkedHashMap<String,Object>();
 		
-		props.put("firstName",na.firstNameTxt.getText());
-		props.put("middleName",na.middleNameTxt.getText());
-		props.put("lastName",na.fatherNameTxt.getText());
-		props.put("address",na.addressTxt.getText());
-		props.put("adhar",na.adharTxt.getText());
-		props.put("mobile",na.mobileNoTxt.getText());
-		props.put("alternateMo",na.alternateMoNoTxt.getText());
-		props.put("parentMoNo",na.parentMoNoTxt.getText());
-		props.put("qualification",na.qualificationTxt.getText());
-		props.put("occupation",na.occupationTxt.getText());
-		props.put("admissionType",(String) na.admissionTypeTxt.getSelectedItem());
-		props.put("shiftType",(String) na.shiftTypeCmb.getSelectedItem());
-		props.put("feesPaid",na.feesPaidTxt.getText());
-		props.put("remainingFees",na.remainingFeesTxt.getText());
+		props.put("FIRSTNAME",na.firstNameTxt.getText());
+		props.put("MIDDLENAME",na.middleNameTxt.getText());
+		props.put("LASTNAME",na.fatherNameTxt.getText());
+		props.put("ADDRESS",na.addressTxt.getText());
+		props.put("ADHAR",na.adharTxt.getText());
+		props.put("MOBILE",na.mobileNoTxt.getText());
+		props.put("ALTERNATEMO",na.alternateMoNoTxt.getText());
+		props.put("PARENTMONO",na.parentMoNoTxt.getText());
+		props.put("QUALIFICATION",na.qualificationTxt.getText());
+		props.put("OCCUPATION",na.occupationTxt.getText());
+		props.put("ADMISSIONTYPE",(String) na.admissionTypeTxt.getSelectedItem());
+		props.put("SHIFTTYPE",(String) na.shiftTypeCmb.getSelectedItem());
+		props.put("FEESPAID",na.feesPaidTxt.getText());
+		props.put("REMAININGFEES",na.remainingFeesTxt.getText());
+		new Student().save(props);	
 	}
+	
 }

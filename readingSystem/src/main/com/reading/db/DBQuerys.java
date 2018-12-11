@@ -2,16 +2,17 @@ package com.reading.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public abstract class DBQuerys {
-	HashMap<String,String> hm=new HashMap<String,String>();
+	LinkedHashMap<String,String> hm=new LinkedHashMap<String,String>();
 	static String primaryKey="";
 	Connection con=null;
 	String tableName;
-	public void set(HashMap hm,String tableName,Connection con){
+	public void set(LinkedHashMap hm,String tableName,Connection con){
 		this.hm=hm;
 		this.tableName=tableName;
 		this.con=con;
@@ -66,18 +67,28 @@ public abstract class DBQuerys {
 	}
 	public boolean createTable() {
 		try{
-                    StringBuilder sql=new StringBuilder("create teble "+tableName+"(");
-		StringBuilder column=new StringBuilder();
+                 StringBuilder sql=new StringBuilder("create table "+tableName+"(");
+                 StringBuilder column=new StringBuilder();
                 for(String key:hm.keySet()){
                     column.append(key+" "+hm.get(key)+",");
                 }
 		column.append(")");
                 sql.append(column.toString());
 		Statement stmt=this.con.createStatement();
-                stmt.executeQuery(sql.toString());
+                stmt.execute(sql.toString());
                 }catch(Exception e){
                     e.printStackTrace();
                 }
 		return false;
+	}
+	public ResultSet getData() {
+		StringBuilder sql=new StringBuilder("select * from "+tableName);
+		try {
+			Statement stmt=con.createStatement();
+			return stmt.executeQuery(sql.toString());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
