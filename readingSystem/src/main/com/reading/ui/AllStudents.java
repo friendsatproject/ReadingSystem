@@ -1,13 +1,9 @@
 package com.reading.ui;
 
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.swing.JInternalFrame;
-import javax.swing.table.DefaultTableModel;
 
-import com.reading.db.Student;
+import com.reading.operaton.DetDBData;
 import com.reading.operaton.FormatFrame;
 
 /*
@@ -22,7 +18,7 @@ import com.reading.operaton.FormatFrame;
 public class AllStudents extends javax.swing.JInternalFrame {
 JInternalFrame frame;
 Home home;
-ResultSet rs=null;
+
     /**
      * Creates new form AllStudents
      */
@@ -31,25 +27,7 @@ ResultSet rs=null;
         initComponents();
         FormatFrame ff = new FormatFrame(this);
         ff.formatTable(table);
-        try {
-			setTabel();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-    }
-    public void setTabel() throws SQLException {
-    	
-    	rs=new Student().getData();
-    	DefaultTableModel model = (DefaultTableModel)table.getModel();
-    	while(rs.next()) {
-    		model.addRow(new Object[] {
-        			rs.getString(1),
-        			rs.getString(2)
-        	});
-    	}
-    	
+		new DetDBData().setStudent(table);        
     }
     
     /**
@@ -87,6 +65,8 @@ ResultSet rs=null;
                 return canEdit [columnIndex];
             }
         });
+        table.setRowHeight(25);
+        table.setSelectionBackground(new java.awt.Color(255, 153, 0));
         jScrollPane1.setViewportView(table);
         if (table.getColumnModel().getColumnCount() > 0) {
             table.getColumnModel().getColumn(0).setPreferredWidth(50);

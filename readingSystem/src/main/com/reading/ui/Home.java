@@ -180,6 +180,7 @@ public class Home extends javax.swing.JFrame {
         windo.add(frame);
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+    
 
     private void expenceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenceBtnActionPerformed
         frame.dispose();
