@@ -1,10 +1,12 @@
 package com.reading.ui;
 
 
+import java.util.HashMap;
+
 import javax.swing.JInternalFrame;
 
-import com.reading.operaton.DetDBData;
 import com.reading.operaton.FormatFrame;
+import com.reading.operaton.SetAllStudent;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,6 +20,7 @@ import com.reading.operaton.FormatFrame;
 public class AllStudents extends javax.swing.JInternalFrame {
 JInternalFrame frame;
 Home home;
+HashMap<String,String>data=new HashMap<String,String>();
 
     /**
      * Creates new form AllStudents
@@ -27,7 +30,7 @@ Home home;
         initComponents();
         FormatFrame ff = new FormatFrame(this);
         ff.formatTable(table);
-		new DetDBData().setStudent(table);        
+        new SetAllStudent().setTable(table);
     }
     
     /**
@@ -135,7 +138,7 @@ Home home;
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-    	ShowStudentDetails frame = new ShowStudentDetails();
+    	ShowStudentDetails frame = new ShowStudentDetails(table);
 //        
         home.windo.add(frame);
         frame.setVisible(true);

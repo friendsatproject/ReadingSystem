@@ -21,6 +21,7 @@ public class Student extends DBQuerys{
 		put("SHIFTTYPE","char(50)");
 		put("FEESPAID","char(50)");
 		put("REMAININGFEES","char(50)");
+		put("JOINDATE","char(20)");
 	}};
 	public Student(){
 		con=new DBConnection().getConnection();

@@ -91,4 +91,20 @@ public abstract class DBQuerys {
 		}
 		return null;
 	}
+	public ResultSet getData(HashMap<String,String> data) {
+		StringBuilder sql=new StringBuilder("select * from "+tableName+" where ");
+		for(String key:data.keySet()) {
+			sql.append(key+"='");
+			sql.append(data.get(key)+"'");
+			
+		}
+			
+		try {
+			Statement stmt=con.createStatement();
+			return stmt.executeQuery(sql.toString());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
