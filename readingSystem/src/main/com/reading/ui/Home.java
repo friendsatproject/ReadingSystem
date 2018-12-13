@@ -74,7 +74,12 @@ public class Home extends javax.swing.JFrame {
         });
 
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("jButton1");
+        jButton5.setText("Closed Admissions");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("User name");
 
@@ -193,6 +198,13 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         frame.dispose();
     }//GEN-LAST:event_homeBtnActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       frame.dispose();
+        frame = new ClosedAdmissions(this);
+        windo.add(frame);
+        frame.setVisible(true); // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import javax.swing.JInternalFrame;
 
 import com.reading.operaton.FormatFrame;
+import com.reading.operaton.SearchTableData;
 import com.reading.operaton.SetAllStudent;
 
 /*
@@ -31,6 +32,7 @@ HashMap<String,String>data=new HashMap<String,String>();
         FormatFrame ff = new FormatFrame(this);
         ff.formatTable(table);
         new SetAllStudent().setTable(table);
+        new SearchTableData(searchText,table);
     }
     
     /**
@@ -47,7 +49,7 @@ HashMap<String,String>data=new HashMap<String,String>();
         table = new javax.swing.JTable();
         updateBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        searchText = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -100,7 +102,7 @@ HashMap<String,String>data=new HashMap<String,String>();
         jLabel1.setText("Search");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("List Of Active Student");
+        jLabel2.setText("List Of Student");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,7 +115,7 @@ HashMap<String,String>data=new HashMap<String,String>();
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(updateBtn))
                     .addGroup(layout.createSequentialGroup()
@@ -129,7 +131,7 @@ HashMap<String,String>data=new HashMap<String,String>();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateBtn)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -150,7 +152,7 @@ HashMap<String,String>data=new HashMap<String,String>();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField searchText;
     private javax.swing.JTable table;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
