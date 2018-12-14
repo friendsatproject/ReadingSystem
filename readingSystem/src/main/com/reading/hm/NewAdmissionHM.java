@@ -11,6 +11,7 @@ public class NewAdmissionHM {
 	public NewAdmissionHM(NewAdmission na) {
 		LinkedHashMap<String,Object> props = new LinkedHashMap<String,Object>();
 		
+		props.put("ID","101");
 		props.put("FIRSTNAME",na.firstNameTxt.getText());
 		props.put("MIDDLENAME",na.middleNameTxt.getText());
 		props.put("LASTNAME",na.fatherNameTxt.getText());

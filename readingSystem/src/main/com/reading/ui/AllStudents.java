@@ -7,7 +7,7 @@ import javax.swing.JInternalFrame;
 
 import com.reading.operaton.FormatFrame;
 import com.reading.operaton.SearchTableData;
-import com.reading.operaton.SetAllStudent;
+import com.reading.operaton.SetAllTable;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,7 +31,7 @@ HashMap<String,String>data=new HashMap<String,String>();
         initComponents();
         FormatFrame ff = new FormatFrame(this);
         ff.formatTable(table);
-        new SetAllStudent().setTable(table);
+        new SetAllTable().setTable(table);
         new SearchTableData(searchText,table);
     }
     

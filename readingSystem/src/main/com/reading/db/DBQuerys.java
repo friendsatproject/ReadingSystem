@@ -3,6 +3,7 @@ package com.reading.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -20,6 +21,7 @@ public abstract class DBQuerys {
 	}
 	public boolean save(LinkedHashMap<String,Object> lhm) { 
 		
+		try {
 		StringBuilder sql=new StringBuilder("insert into "+tableName+"(");
 		StringBuilder column=new StringBuilder();
 		StringBuilder values=new StringBuilder();
@@ -33,33 +35,43 @@ public abstract class DBQuerys {
 		sql.append(column);
 		sql.append(values);
 		sql.append(");");
-		try {
+		
 			PreparedStatement pstmt=con.prepareStatement(sql.toString());
 			pstmt.executeUpdate();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
+		return true;
 	}
 	public boolean update(LinkedHashMap<String,Object> lhm) {
-		StringBuilder sql=new StringBuilder("update table "+tableName+" set");
-		primaryKey=(String) lhm.get("id");
+		try {
+		StringBuilder sql=new StringBuilder("update table "+tableName+" set ");
+		primaryKey=(String) lhm.get("ID");
 		StringBuilder column=new StringBuilder();
 		String prefix="";
 		for(String key:lhm.keySet()) {
-			column.append(prefix+key+"+=");
+			column.append(prefix+key+"=");
 			column.append("'"+lhm.get(key)+"'");
 			prefix=",";
 		}
-		sql.append(" where id='"+primaryKey+";");
+		sql.append(column);
+		sql.append(" where id='"+lhm.get("ID")+"';");
 		
-		
+		System.out.println(sql.toString());
 //		update table tname set columnname="" where columnname="" 
+		
+			Statement stmt=con.createStatement();
+			stmt.executeUpdate(sql.toString());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 	public boolean delete(LinkedHashMap<String,Object> lhm) {
-		primaryKey=(String) lhm.get("id");
+		primaryKey=(String) lhm.get("ID");
 		StringBuilder sql=new StringBuilder("delete * from "+tableName+" where id='"+primaryKey+"'");
 		
 		
@@ -106,5 +118,15 @@ public abstract class DBQuerys {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public void drop() {
+		try {
+			StringBuilder sql=new StringBuilder("drop table "+tableName);
+			Statement stmt=con.createStatement();
+			stmt.execute(sql.toString());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

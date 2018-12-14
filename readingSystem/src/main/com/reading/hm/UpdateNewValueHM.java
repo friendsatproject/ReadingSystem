@@ -12,6 +12,7 @@ public class UpdateNewValueHM {
 
 		LinkedHashMap<String, Object> newDataHm = new LinkedHashMap<String, Object>();
 
+		newDataHm.put("ID","101");
 		newDataHm.put("FIRSTNAME", ssd.firstNameTxt.getText());
 		newDataHm.put("MIDDLENAME", ssd.middleNameTxt.getText());
 		newDataHm.put("LASTNAME", ssd.fatherNameTxt.getText());

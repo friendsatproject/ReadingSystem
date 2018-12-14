@@ -42,12 +42,12 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
             DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
             HashMap<String, String> data = new HashMap<String, String>();
             int row = studentTable.getSelectedRow();
-            data.put("ADHAR", (String) model.getValueAt(row, 2));
+            data.put("ADDRESS", (String) model.getValueAt(row, 2));
 //			data.put("MOBILE", (String) model.getValueAt(row, 4));
             rs = new Student().getData(data);
             rs.next();
             // to lable
-            name.setText(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3));
+            name.setText(rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4));
 //			.setText(rs.getString(2));
 //			.setText(rs.getString(3));
             address.setText(rs.getString(4));
@@ -63,9 +63,9 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
 //			remainingfees.setText(rs.getString(14));
 
             // to textArea
-            firstNameTxt.setText(rs.getString(1));
-            middleNameTxt.setText(rs.getString(2));
-            fatherNameTxt.setText(rs.getString(3));
+            firstNameTxt.setText(rs.getString(2));
+            middleNameTxt.setText(rs.getString(3));
+            fatherNameTxt.setText(rs.getString(4));
             addressTxt.setText(rs.getString(4));
             adharTxt.setText(rs.getString(5));
             mobileNoTxt.setText(rs.getString(6));

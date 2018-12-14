@@ -1,12 +1,14 @@
 package com.reading.ui;
 
-import javax.swing.table.DefaultTableModel;
-
-import com.reading.operaton.FormatFrame;
-import static java.awt.SystemColor.window;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.JInternalFrame;
+
+import javax.swing.table.DefaultTableModel;
+
+import com.reading.hm.AddExpenceHm;
+import com.reading.operaton.FormatFrame;
+import com.reading.operaton.SearchTableData;
+import com.reading.operaton.SetAllTable;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,6 +31,8 @@ public class Expences extends javax.swing.JInternalFrame {
         initComponents();
         FormatFrame ff = new FormatFrame(this);
         ff.formatTable(table);
+        new SetAllTable().setExpenceTable(table);
+        new SearchTableData(searchText, table);
     }
 
     /**
@@ -46,7 +50,7 @@ public class Expences extends javax.swing.JInternalFrame {
         table = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        searchText = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         dd1 = new javax.swing.JComboBox();
         yy1 = new javax.swing.JComboBox();
@@ -75,11 +79,11 @@ public class Expences extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Sr. No.", "Expence Type", "Amount", "Date", "Description"
+                "Sr. No.", "Expence Type", "Amount", "Date", "Description", "User"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -118,7 +122,7 @@ public class Expences extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -151,7 +155,7 @@ public class Expences extends javax.swing.JInternalFrame {
                         .addComponent(searchBtn))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)
                         .addComponent(dd1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(yy1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,13 +303,14 @@ public class Expences extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+    public void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
 
-    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+    public void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
+    	new AddExpenceHm(this);
         SimpleDateFormat dt = new SimpleDateFormat("dd-MM-YYYY");
 
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -314,19 +319,20 @@ public class Expences extends javax.swing.JInternalFrame {
             eTypeTxt.getText(),
             amountTxt.getText(),
             dt.format(new Date()),
-            descriptionTxt.getText()
+            descriptionTxt.getText(),
+            "User"
         });
 //        this.dispose();
     }//GEN-LAST:event_saveBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField amountTxt;
+    public javax.swing.JTextField amountTxt;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JComboBox dd1;
     private javax.swing.JComboBox dd2;
-    private javax.swing.JTextArea descriptionTxt;
-    private javax.swing.JTextField eTypeTxt;
+    public javax.swing.JTextArea descriptionTxt;
+    public javax.swing.JTextField eTypeTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -342,11 +348,11 @@ public class Expences extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox mm1;
     private javax.swing.JComboBox mm2;
     private javax.swing.JButton saveBtn;
     private javax.swing.JButton searchBtn;
+    private javax.swing.JTextField searchText;
     private javax.swing.JTable table;
     private javax.swing.JComboBox yy1;
     private javax.swing.JComboBox yy2;

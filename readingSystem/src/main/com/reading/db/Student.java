@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.util.LinkedHashMap;
 
 public class Student extends DBQuerys{
-	String tableName="student";
+	String tableName="STUDENT";
 	Connection con=null;
 	LinkedHashMap<String,String> hm=new LinkedHashMap<String,String>(){{
+		put("ID","char(20) primary key");
 		put("FIRSTNAME","char(50)");
 		put("MIDDLENAME","char(50)");
 		put("LASTNAME","char(50)");
@@ -28,6 +29,7 @@ public class Student extends DBQuerys{
 		set(hm,tableName,con);
 	}
 	public static void main(String[] args) {
+		new Student().drop();
 		new Student().createTable();
 	}
 }
