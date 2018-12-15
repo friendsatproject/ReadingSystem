@@ -91,7 +91,7 @@ public abstract class DBQuerys {
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-		return false;
+		return true;
 	}
 	public ResultSet getData() {
 		StringBuilder sql=new StringBuilder("select * from "+tableName);

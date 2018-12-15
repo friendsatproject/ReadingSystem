@@ -1,11 +1,11 @@
 package com.reading.operaton;
 
 import java.sql.ResultSet;
-import java.util.HashMap;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.reading.db.ActionTrackerDb;
 import com.reading.db.ExpencesDb;
 import com.reading.db.Student;
 
@@ -30,6 +30,19 @@ public class SetAllTable {
 		try {
 			 model = (DefaultTableModel) table.getModel();
 			rs = new ExpencesDb().getData();
+			int i = 0;
+			while (rs.next()) {
+				model.addRow(new Object[] {  rs.getString(1) ,
+						rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5),rs.getString(6)});
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void setActionTracker(JTable table) {
+		try {
+			 model = (DefaultTableModel) table.getModel();
+			rs = new ActionTrackerDb().getData();
 			int i = 0;
 			while (rs.next()) {
 				model.addRow(new Object[] {  rs.getString(1) ,

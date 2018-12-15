@@ -42,6 +42,7 @@ public class Home extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         homeBtn = new javax.swing.JButton();
+        actionTrackerBtn = new javax.swing.JButton();
         windo = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -113,6 +114,13 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        actionTrackerBtn.setText("Trace Action");
+        actionTrackerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actionTrackerBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -125,7 +133,8 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(expenceBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(actionTrackerBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -143,7 +152,9 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(expenceBtn)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(actionTrackerBtn)
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout windoLayout = new javax.swing.GroupLayout(windo);
@@ -206,6 +217,14 @@ public class Home extends javax.swing.JFrame {
         frame.setVisible(true); // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void actionTrackerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionTrackerBtnActionPerformed
+        // TODO add your handling code here:
+        frame.dispose();
+        frame = new ActionTracker(this);
+        windo.add(frame);
+        frame.setVisible(true);
+    }//GEN-LAST:event_actionTrackerBtnActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         frame.dispose();
@@ -219,6 +238,7 @@ public class Home extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton actionTrackerBtn;
     private javax.swing.JButton expenceBtn;
     private javax.swing.JButton homeBtn;
     private javax.swing.JButton jButton1;
