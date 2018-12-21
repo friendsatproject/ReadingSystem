@@ -1,7 +1,8 @@
 package com.reading.hm;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
+
+import javax.swing.JOptionPane;
 
 import com.reading.db.Student;
 import com.reading.ui.ShowStudentDetails;
@@ -29,6 +30,9 @@ public class UpdateNewValueHM {
 //      newDataHm.put("REMAININGFEES", );
 //      newDataHm.put("JOINDATE", );
 		
-		new Student().update(newDataHm);
+		if(new Student().update(newDataHm)) {
+			new ActionTrackerHM("tudent Data Updation done","ID");
+			JOptionPane.showMessageDialog(null, "Student updated  successfully !", "Student Updated", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 }

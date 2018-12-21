@@ -6,8 +6,9 @@ import java.util.LinkedHashMap;
 
 import javax.swing.JOptionPane;
 
-import com.reading.ui.Expences;
 import com.reading.db.ExpencesDb;
+import com.reading.operaton.GenerateId;
+import com.reading.ui.Expences;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -26,8 +27,8 @@ public class AddExpenceHm {
 	public AddExpenceHm(Expences ex) {
 		this.ex = ex;
 		SimpleDateFormat dt = new SimpleDateFormat("dd-MM-YYYY");
-
-		data.put("ID", "104");
+		String id = GenerateId.getExpenceId("USER", ex.amountTxt.getText());
+		data.put("ID", id);
 		data.put("EXPENCETYPE", ex.eTypeTxt.getText());
 		data.put("AMOUNT", ex.amountTxt.getText());
 		data.put("DATE", dt.format(new Date()));
@@ -38,6 +39,7 @@ public class AddExpenceHm {
 //			JOptionPane.showMessageDialog(null, "tableCreated", "", JOptionPane.INFORMATION_MESSAGE);
 //		}
 		if(new ExpencesDb().save(data)) {
+			new ActionTrackerHM("Expence Added",id)	;	
 			JOptionPane.showMessageDialog(null, "Expence saved successfully !", "", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}

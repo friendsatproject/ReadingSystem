@@ -13,7 +13,7 @@ public class ExpencesDb extends DBQuerys{
 		put("DATE","char(50)");
 		put("DESCRIPTION","char(50)");
 		put("USER","char(50)");
-		 
+		
 	}};
 	public ExpencesDb(){
 		con=new DBConnection().getConnection();

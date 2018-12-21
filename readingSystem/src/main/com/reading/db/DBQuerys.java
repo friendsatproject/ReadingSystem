@@ -68,14 +68,14 @@ public abstract class DBQuerys {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return true;
 	}
 	public boolean delete(LinkedHashMap<String,Object> lhm) {
 		primaryKey=(String) lhm.get("ID");
 		StringBuilder sql=new StringBuilder("delete * from "+tableName+" where id='"+primaryKey+"'");
 		
 		
-		return false;
+		return true;
 	}
 	public boolean createTable() {
 		try{

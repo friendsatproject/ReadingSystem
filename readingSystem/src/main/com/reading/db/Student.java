@@ -23,13 +23,14 @@ public class Student extends DBQuerys{
 		put("FEESPAID","char(50)");
 		put("REMAININGFEES","char(50)");
 		put("JOINDATE","char(20)");
+		put("STATUS","char(6)");
 	}};
 	public Student(){
 		con=new DBConnection().getConnection();
 		set(hm,tableName,con);
 	}
-	public static void main(String[] args) {
-		new Student().drop();
-		new Student().createTable();
-	}
+//	public static void main(String[] args) {
+//		new Student().drop();
+//		new Student().createTable();
+//	}
 }

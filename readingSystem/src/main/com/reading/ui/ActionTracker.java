@@ -42,14 +42,9 @@ public class ActionTracker extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
 
         table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
+            new Object [][] { },
             new String [] {
-                "Date", "Time", "Action", "User", "Reference"
+                "Date", "Time", "Action", "User", "Reference ID"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -10,27 +10,25 @@ import com.reading.db.ActionTrackerDb;
 import com.reading.ui.ActionTracker;
 
 public class ActionTrackerHM {
-	ActionTracker at;
+	 
 
 	LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>();
 
-	public ActionTrackerHM(ActionTracker ex) {
-		this.at = at;
+	public ActionTrackerHM(String action,String reference) {
+		 
 		SimpleDateFormat dt = new SimpleDateFormat("dd-MM-YYYY");
-		SimpleDateFormat tf = new SimpleDateFormat("HH:mm:ss");
+		SimpleDateFormat tf = new SimpleDateFormat("hh:mm:ss a");
 
-		data.put("ID", "104");
+		
 		data.put("DATE", dt.format(new Date()));
-		data.put("ACTION", "action");
+		data.put("ACTION", action);
 		data.put("TIME", tf.format(new Date()));
 		data.put("USER", "user");
-		data.put("REFERENCE", "Reference");
+		data.put("REFERENCE", reference);
 		
 //		if(new ExpencesDb().createTable()) {
 //			JOptionPane.showMessageDialog(null, "tableCreated", "", JOptionPane.INFORMATION_MESSAGE);
 //		}
-		if(new ActionTrackerDb().save(data)) {
-			JOptionPane.showMessageDialog(null, "Expence saved successfully !", "", JOptionPane.INFORMATION_MESSAGE);
-		}
+		new ActionTrackerDb().save(data);
 	}
 }
