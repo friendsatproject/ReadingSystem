@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import com.reading.db.Student;
 import com.reading.hm.UpdateNewValueHM;
 import com.reading.operaton.FormatFrame;
+import com.reading.operaton.SetAllTable;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,6 +26,7 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
     LinkedHashMap<String,Object> oldDataHm ;
     JTable studentTable;
     ResultSet rs;
+    String id;
 
     /**
      * Creates new form ShowStudentDetails
@@ -35,6 +37,7 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
         FormatFrame ff = new FormatFrame(this);
         ff.formatTable(table);
         setStudentDetailsToLable();
+        new SetAllTable().setFeesTable(table, id);
     }
 
     public void setStudentDetailsToLable() {
@@ -47,6 +50,7 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
             rs = new Student().getData(data);
             rs.next();
             // to lable
+            id=rs.getString(1);
             name.setText(rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4));
 //			.setText(rs.getString(2));
 //			.setText(rs.getString(3));

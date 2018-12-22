@@ -79,7 +79,7 @@ public class Expences extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Sr. No.", "Expence Type", "Amount", "Date", "Description", "User"
+                "Expence ID.", "Expence Type", "Amount", "Date", "Description", "User"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -311,18 +311,9 @@ public class Expences extends javax.swing.JInternalFrame {
     public void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
     	new AddExpenceHm(this);
-        SimpleDateFormat dt = new SimpleDateFormat("dd-MM-YYYY");
+    	((DefaultTableModel) table.getModel()).setRowCount(0);
+    	new SetAllTable().setExpenceTable(table);
 
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.addRow(new Object[]{
-            model.getRowCount() + 1,
-            eTypeTxt.getText(),
-            amountTxt.getText(),
-            dt.format(new Date()),
-            descriptionTxt.getText(),
-            "User"
-        });
-//        this.dispose();
     }//GEN-LAST:event_saveBtnActionPerformed
 
 

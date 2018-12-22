@@ -47,7 +47,7 @@ public abstract class DBQuerys {
 	}
 	public boolean update(LinkedHashMap<String,Object> lhm) {
 		try {
-		StringBuilder sql=new StringBuilder("update table "+tableName+" set ");
+		StringBuilder sql=new StringBuilder("update "+tableName+" set ");
 		primaryKey=(String) lhm.get("ID");
 		StringBuilder column=new StringBuilder();
 		String prefix="";

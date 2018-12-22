@@ -8,10 +8,10 @@ import com.reading.db.Student;
 public class DeleteStudentHM {
 	ResultSet rs;
 
-	public DeleteStudentHM(String adhar) {
+	public boolean closeStatus(String id) {
 		LinkedHashMap<String,Object>record = new LinkedHashMap<String,Object>();
 		try {
-			record.put("ADHAR", adhar);
+			record.put("ID", id);
 			record.put("STATUS","CLOSED");
 			new Student().update(record);
 			
@@ -33,7 +33,9 @@ public class DeleteStudentHM {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 
 }
