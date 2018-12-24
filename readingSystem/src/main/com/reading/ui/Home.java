@@ -43,6 +43,7 @@ public class Home extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         homeBtn = new javax.swing.JButton();
         actionTrackerBtn = new javax.swing.JButton();
+        SettingBtn = new javax.swing.JButton();
         windo = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -121,6 +122,13 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        SettingBtn.setText("Settings");
+        SettingBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SettingBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -134,7 +142,8 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(actionTrackerBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(actionTrackerBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SettingBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -154,7 +163,9 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jButton5)
                 .addGap(18, 18, 18)
                 .addComponent(actionTrackerBtn)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(SettingBtn)
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout windoLayout = new javax.swing.GroupLayout(windo);
@@ -196,7 +207,7 @@ public class Home extends javax.swing.JFrame {
         windo.add(frame);
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
-    
+
 
     private void expenceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenceBtnActionPerformed
         frame.dispose();
@@ -211,7 +222,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_homeBtnActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       frame.dispose();
+        frame.dispose();
         frame = new ClosedAdmissions(this);
         windo.add(frame);
         frame.setVisible(true); // TODO add your handling code here:
@@ -224,6 +235,14 @@ public class Home extends javax.swing.JFrame {
         windo.add(frame);
         frame.setVisible(true);
     }//GEN-LAST:event_actionTrackerBtnActionPerformed
+
+    private void SettingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingBtnActionPerformed
+        // TODO add your handling code here:
+        frame.dispose();
+        frame = new SettingsUI(this);
+        windo.add(frame);
+        frame.setVisible(true);
+    }//GEN-LAST:event_SettingBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -238,6 +257,7 @@ public class Home extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton SettingBtn;
     private javax.swing.JButton actionTrackerBtn;
     private javax.swing.JButton expenceBtn;
     private javax.swing.JButton homeBtn;

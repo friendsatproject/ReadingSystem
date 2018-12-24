@@ -6,20 +6,21 @@ import java.util.LinkedHashMap;
 
 import javax.swing.JOptionPane;
 
-import com.reading.db.Student;
+import com.reading.db.FeesDb;
 import com.reading.ui.NewAdmission;
 
 public class FeesHM {
-	public FeesHM(NewAdmission na) {
-		LinkedHashMap<String,Object> props = new LinkedHashMap<String,Object>();
-		props.put("ID","id");
-		props.put("DATE",new SimpleDateFormat("dd-MM-YYYY").format(new Date()));
-		props.put("AMOUNT","amount");
-		props.put("RECEIVER","user");
-		
-		if(new Student().save(props)) {
-			new ActionTrackerHM("Fees Updated","id");
-			JOptionPane.showMessageDialog(null, "Fees Updated successfully !", "Fees Updated", JOptionPane.INFORMATION_MESSAGE);
-		}
-	}
+
+    public FeesHM(String amount, String id) {
+        LinkedHashMap<String, Object> props = new LinkedHashMap<String, Object>();
+        props.put("ID", id);
+        props.put("DATE", new SimpleDateFormat("dd-MM-YYYY").format(new Date()));
+        props.put("AMOUNT", amount);
+        props.put("RECEIVER", "user");
+
+        if (new FeesDb().save(props)) {
+            new ActionTrackerHM("Fees Submited", id);
+            JOptionPane.showMessageDialog(null, "Fees Updated successfully !", "Fees Updated", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 }
