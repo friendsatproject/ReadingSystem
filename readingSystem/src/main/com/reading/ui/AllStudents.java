@@ -145,7 +145,7 @@ public class AllStudents extends javax.swing.JInternalFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_updateBtnActionPerformed
-		ShowStudentDetails frame = new ShowStudentDetails(table);
+		ShowStudentDetails frame = new ShowStudentDetails();
 //        
 		home.windo.add(frame);
 		frame.setVisible(true);

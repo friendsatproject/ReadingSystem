@@ -4,35 +4,48 @@ import java.util.LinkedHashMap;
 
 import javax.swing.JOptionPane;
 
+import com.reading.db.FeesDb;
 import com.reading.db.Student;
 import com.reading.operaton.GenerateId;
+import com.reading.operaton.StaticMethods;
 import com.reading.ui.NewAdmission;
 
 public class NewAdmissionHM {
 
 	NewAdmission na;
 	public NewAdmissionHM(NewAdmission na) {
+		LinkedHashMap<String,Object> fees = new LinkedHashMap<String,Object>();
 		LinkedHashMap<String,Object> props = new LinkedHashMap<String,Object>();
-		String id = GenerateId.getStudentId(na.firstNameTxt.getText(),na.adharTxt.getText());
+		String id = GenerateId.getStudentId(na.nameTxt.getText(),na.adharTxt.getText());
+		String date = StaticMethods.admissionDate(na.ddCmb, na.mmCmb, na.yyyyCmb);
 		props.put("ID",id);
-		props.put("FIRSTNAME",na.firstNameTxt.getText());
-		props.put("MIDDLENAME",na.middleNameTxt.getText());
-		props.put("LASTNAME",na.fatherNameTxt.getText());
-		props.put("ADDRESS",na.addressTxt.getText());
+		props.put("NAME",na.nameTxt.getText());
+		props.put("TADDRESS",na.tempAddress.getText());
+		props.put("PADDRESS",na.tempAddress.getText());
 		props.put("ADHAR",na.adharTxt.getText());
+		props.put("QUALIFICATION",na.qualificationTxt.getText());
+		props.put("GENDER",StaticMethods.gender(na.maleRdo, na.femaleRdo));
 		props.put("MOBILE",na.mobileNoTxt.getText());
 		props.put("ALTERNATEMO",na.alternateMoNoTxt.getText());
 		props.put("PARENTMONO",na.parentMoNoTxt.getText());
-		props.put("QUALIFICATION",na.qualificationTxt.getText());
 		props.put("OCCUPATION",na.occupationTxt.getText());
 		props.put("ADMISSIONTYPE",(String) na.admissionTypeTxt.getSelectedItem());
 		props.put("SHIFTTYPE",(String) na.shiftTypeCmb.getSelectedItem());
-		props.put("FEESPAID",na.feesPaidTxt.getText());
-		props.put("REMAININGFEES",na.remainingFeesTxt.getText());
+		props.put("JOINDATE",date);
 		props.put("STATUS","ACTIVE");
-		if(new Student().save(props)) {
+		
+		fees.put("ID", id);
+		fees.put("DATE",date);
+		fees.put("AMOUNT",na.feesPaidTxt.getText());
+		fees.put("RECEIVER","USER");
+		
+		try {
+		if(new Student().save(props) && new FeesDb().save(fees)) {
 			new ActionTrackerHM("New student registration done",id);
 			JOptionPane.showMessageDialog(null, "Student registerd  successfully !", "Student Added", JOptionPane.INFORMATION_MESSAGE);
+		}
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(na, "Record may available in closed student list", "Error Message", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	

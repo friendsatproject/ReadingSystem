@@ -31,8 +31,8 @@ public class UpdateUserHM extends DBQuerys{
 		props.put("USERTYPE", sui.userTypeCmb.getSelectedItem());
 		
 		if(new UsersDb().update(props)) {
-			new ActionTrackerHM("User Information Updated","ID");
-			JOptionPane.showMessageDialog(null, "User information updated  successfully !", "Student Updated", JOptionPane.INFORMATION_MESSAGE);
+			new ActionTrackerHM("User Information Updated",sui.uidTxt.getText());
+			JOptionPane.showMessageDialog(null, "User information updated  successfully !", "User Updated", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 }
