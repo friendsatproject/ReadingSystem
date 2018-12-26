@@ -13,8 +13,10 @@ import com.reading.db.FeesDb;
 import com.reading.db.Student;
 import com.reading.db.UsersDb;
 import com.reading.ui.SettingsUI;
+import com.reading.ui.ShowStudentDetails;
 
 public class SetAllTable {
+
 	DefaultTableModel model;
 	ResultSet rs;
 
@@ -27,8 +29,8 @@ public class SetAllTable {
 			rs = new Student().getData(data);
 			int i = 0;
 			while (rs.next()) {
-				model.addRow(new Object[] { rs.getString(1), rs.getString(2) + " " + rs.getString(3), rs.getString(5),
-						rs.getString(10), rs.getString(7), "Pending", rs.getString(6) });
+				model.addRow(new Object[] { rs.getString(1), rs.getString(2), rs.getString(8), rs.getString(7),
+						rs.getString(6), rs.getString(11), rs.getString(13), "Pending" });
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -123,27 +125,15 @@ public class SetAllTable {
 		}
 	}
 
-	public void setUserToTable(JTable table, JComboBox jcb) {
+	public void setUserToTable(JTable table) {
 		try {
 			model = (DefaultTableModel) table.getModel();
 			rs = new UsersDb().getData();
 			int i = 0;
 			while (rs.next()) {
-				model.addRow(new Object[] { 
-						++i, 
-						rs.getString(1), 
-						rs.getString(2), 
-						rs.getString(3), 
-						rs.getString(4),
-						rs.getString(5), 
-						rs.getString(6), 
-						rs.getString(7), 
-						rs.getString(8), 
-						rs.getString(9),
-						rs.getString(10), 
-						rs.getString(11), 
-						rs.getString(12), 
-						rs.getString(13)});
+				model.addRow(new Object[] { ++i, rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),
+						rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13) });
 				// set to dropdownlist
 				SettingsUI.selectUserCmb.addItem(rs.getString(1));
 			}
@@ -180,7 +170,48 @@ public class SetAllTable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
+	public void setStudentToFields(String studentId, ShowStudentDetails ssd) {
+		HashMap<String, String> data = new HashMap<String, String>();
+		data.put("ID", studentId);
+		try {
+			rs = new Student().getData(data);
+			rs.next();
+			// to labale
+			ssd.idLbl.setText(rs.getString(1));
+			ssd.nameLbl.setText(rs.getString(2));
+			ssd.tAddressLbl.setText(rs.getString(3));
+			ssd.pAddressLbl.setText(rs.getString(4));
+			ssd.adharLbl.setText(rs.getString(5));
+			ssd.qualificationLbl.setText(rs.getString(6));
+			ssd.genderLbl.setText(rs.getString(7));
+			ssd.monoLbl.setText(rs.getString(8));
+			ssd.altMoNoLbl.setText(rs.getString(9));
+			ssd.parentMoNoLbl.setText(rs.getString(10));
+			ssd.occupationLbl.setText(rs.getString(11));
+			ssd.admissionTypeLbl.setText(rs.getString(12));
+			ssd.shiftTypeLbl.setText(rs.getString(13));
+			ssd.joinDateLbl.setText(rs.getString(14));
+
+			// to textField
+			ssd.idTxt.setText(rs.getString(1));
+			ssd.nameTxt.setText(rs.getString(2));
+			ssd.tempAddress.setText(rs.getString(3));
+			ssd.permenentAddress.setText(rs.getString(4));
+			ssd.adharTxt.setText(rs.getString(5));
+			ssd.qualificationTxt.setText(rs.getString(6));
+			StaticMethods.setGender(ssd.maleRdo, ssd.femaleRdo, ssd.otherRdo, rs.getString(7));
+			ssd.mobileNoTxt.setText(rs.getString(8));
+			ssd.alternateMoNoTxt.setText(rs.getString(9));
+			ssd.parentMoNoLbl.setText(rs.getString(10));
+			ssd.occupationTxt.setText(rs.getString(11));
+			ssd.admissionTypeTxt.setSelectedItem(rs.getString(12));
+			ssd.shiftTypeCmb.setSelectedItem(rs.getString(13));
+			StaticMethods.setDate(ssd.ddCmb, ssd.mmCmb, ssd.yyyyCmb, rs.getString(14));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

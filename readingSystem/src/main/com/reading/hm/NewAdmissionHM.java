@@ -21,7 +21,7 @@ public class NewAdmissionHM {
 		props.put("ID",id);
 		props.put("NAME",na.nameTxt.getText());
 		props.put("TADDRESS",na.tempAddress.getText());
-		props.put("PADDRESS",na.tempAddress.getText());
+		props.put("PADDRESS",na.permenentAddress.getText());
 		props.put("ADHAR",na.adharTxt.getText());
 		props.put("QUALIFICATION",na.qualificationTxt.getText());
 		props.put("GENDER",StaticMethods.gender(na.maleRdo, na.femaleRdo));

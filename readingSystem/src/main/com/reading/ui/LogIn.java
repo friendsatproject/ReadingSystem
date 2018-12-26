@@ -19,6 +19,7 @@ public class LogIn extends javax.swing.JFrame {
     public LogIn() {
         initComponents();
         getContentPane().setBackground(Color.white);
+        this.setLocationRelativeTo(null);
     }
 
     /**

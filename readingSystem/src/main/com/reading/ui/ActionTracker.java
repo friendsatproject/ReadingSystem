@@ -2,6 +2,9 @@ package com.reading.ui;
 
 import com.reading.operaton.FormatFrame;
 import com.reading.operaton.SetAllTable;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,6 +17,7 @@ import com.reading.operaton.SetAllTable;
  */
 public class ActionTracker extends javax.swing.JInternalFrame {
 
+    TableRowSorter<TableModel> sorter;
     Home home;
 
     /**
@@ -24,6 +28,8 @@ public class ActionTracker extends javax.swing.JInternalFrame {
         initComponents();
         new FormatFrame(this).formatTable(table);
         new SetAllTable().setActionTracker(table);
+        sorter = new TableRowSorter<TableModel>(table.getModel());
+        table.setRowSorter(sorter);
     }
 
     /**
@@ -42,13 +48,15 @@ public class ActionTracker extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
 
         table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] { },
+            new Object [][] {
+
+            },
             new String [] {
-                "Date", "Time", "Action", "User", "Reference ID"
+                "Date", "Time", "Action", "User", "Reference"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -61,6 +69,12 @@ public class ActionTracker extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Search");
 
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Action Performed Details");
 
@@ -69,16 +83,13 @@ public class ActionTracker extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,13 +99,23 @@ public class ActionTracker extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                .addGap(6, 6, 6))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        String text = jTextField1.getText();
+        if (text.length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter(text));
+        }
+    }//GEN-LAST:event_jTextField1KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

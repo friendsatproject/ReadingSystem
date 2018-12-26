@@ -38,7 +38,7 @@ public abstract class DBQuerys {
 		
 			PreparedStatement pstmt=con.prepareStatement(sql.toString());
 			pstmt.executeUpdate();
-			
+			con.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 			return false;
@@ -64,16 +64,24 @@ public abstract class DBQuerys {
 		
 			Statement stmt=con.createStatement();
 			stmt.executeUpdate(sql.toString());
+			con.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 		return true;
 	}
 	public boolean delete(LinkedHashMap<String,Object> lhm) {
 		primaryKey=(String) lhm.get("ID");
-		StringBuilder sql=new StringBuilder("delete * from "+tableName+" where id='"+primaryKey+"'");
-		
+		StringBuilder sql=new StringBuilder("delete  from "+tableName+" where id='"+primaryKey+"'");
+		try {
+			Statement stmt=con.createStatement();
+			 stmt.execute(sql.toString());
+			 con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 		
 		return true;
 	}
@@ -88,8 +96,10 @@ public abstract class DBQuerys {
                 sql.append(column.toString());
 		Statement stmt=this.con.createStatement();
                 stmt.execute(sql.toString());
+                con.close();
                 }catch(Exception e){
                     e.printStackTrace();
+                    return false;
                 }
 		return true;
 	}
@@ -124,6 +134,7 @@ public abstract class DBQuerys {
 			StringBuilder sql=new StringBuilder("drop table "+tableName);
 			Statement stmt=con.createStatement();
 			stmt.execute(sql.toString());
+			con.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -23,7 +23,7 @@ public class ActionTrackerHM {
 		data.put("DATE", dt.format(new Date()));
 		data.put("ACTION", action);
 		data.put("TIME", tf.format(new Date()));
-		data.put("USER", "user");
+		data.put("USER", "USER");
 		data.put("REFERENCE", reference);
 		
 //		if(new ExpencesDb().createTable()) {

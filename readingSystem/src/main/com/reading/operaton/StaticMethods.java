@@ -51,4 +51,26 @@ public  class StaticMethods {
 			return "Other";
 		}
 	}
+	public static void setDate(JComboBox dd,JComboBox mm,JComboBox yy,String date) {
+		dd.setSelectedItem(date.substring(0, 2));
+		mm.setSelectedItem(date.substring(3, 5));
+		yy.setSelectedItem(date.substring(6, 10));
+	}
+	public static void setGender(JRadioButton m,  JRadioButton f, JRadioButton o, String gender) {
+		if(gender.equalsIgnoreCase("male")) {
+			m.setSelected(true);
+			f.setSelected(false);
+			o.setSelected(false);
+		}
+		if(gender.equalsIgnoreCase("female")) {
+			m.setSelected(false);
+			f.setSelected(true);
+			o.setSelected(false);
+		}
+		if(gender.equalsIgnoreCase("other")){
+			m.setSelected(false);
+			f.setSelected(false);
+			o.setSelected(true);
+		}
+	}
 }
