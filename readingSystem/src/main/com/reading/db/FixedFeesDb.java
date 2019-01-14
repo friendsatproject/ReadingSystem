@@ -33,7 +33,7 @@ public class FixedFeesDb extends DBQuerys {
 	}
 
 //	public static void main(String[] args) {
-//		new FixedFeesDb().drop();
-//		new FixedFeesDb().createTable();
+////		new FixedFeesDb().drop();
+//		System.out.println(new FixedFeesDb().createTable());
 //	}
 }

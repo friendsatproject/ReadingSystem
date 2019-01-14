@@ -3,7 +3,6 @@ package com.reading.operaton;
 import java.sql.ResultSet;
 import java.util.HashMap;
 
-import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,6 +11,8 @@ import com.reading.db.ExpencesDb;
 import com.reading.db.FeesDb;
 import com.reading.db.Student;
 import com.reading.db.UsersDb;
+import com.reading.feesStatus.FindStatus;
+import com.reading.ui.Home;
 import com.reading.ui.SettingsUI;
 import com.reading.ui.ShowStudentDetails;
 
@@ -21,16 +22,33 @@ public class SetAllTable {
 	ResultSet rs;
 
 //set Active student table
-	public void setActiveStudentTable(JTable table) {
+	public void setActiveStudentTable(JTable table,HashMap<String,Integer> totlFeesHm) {
+		((DefaultTableModel) table.getModel()).setRowCount(0);
 		try {
+			for(String key:totlFeesHm.keySet()) {
+				System.out.println(totlFeesHm.get(key.trim())+" : "+key);
+			}
 			HashMap<String, String> data = new HashMap<String, String>();
 			data.put("STATUS", "ACTIVE");
 			model = (DefaultTableModel) table.getModel();
 			rs = new Student().getData(data);
 			int i = 0;
+			
 			while (rs.next()) {
-				model.addRow(new Object[] { rs.getString(1), rs.getString(2), rs.getString(8), rs.getString(7),
-						rs.getString(6), rs.getString(11), rs.getString(13), "Pending" });
+				model.addRow(new Object[] { 
+						++i,
+						rs.getString(1).trim(),
+						rs.getString(2).trim(), 
+						rs.getString(8).trim(),
+						rs.getString(7).trim(),
+						rs.getString(6).trim(),
+						rs.getString(11).trim(),
+						rs.getString(5).trim(),
+						rs.getString(4).trim(),
+						rs.getString(13).trim(), 
+						
+						new FindStatus(totlFeesHm.get(rs.getString(1).trim()), rs.getString(12).trim(), rs.getString(14).trim()).getStatus() 
+						});
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -45,8 +63,8 @@ public class SetAllTable {
 			rs = new ExpencesDb().getData();
 			int i = 0;
 			while (rs.next()) {
-				model.addRow(new Object[] { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getString(5), rs.getString(6) });
+				model.addRow(new Object[] { ++i,rs.getString(1).trim(), rs.getString(2).trim(), rs.getString(3).trim(), rs.getString(4).trim(),
+						rs.getString(5).trim(), rs.getString(6).trim() });
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -61,8 +79,8 @@ public class SetAllTable {
 			rs = new ActionTrackerDb().getData();
 			int i = 0;
 			while (rs.next()) {
-				model.addRow(new Object[] { rs.getString(1), rs.getString(3), rs.getString(2), rs.getString(4),
-						rs.getString(5) });
+				model.addRow(new Object[] {++i, rs.getString(2).trim(), rs.getString(4).trim(), rs.getString(3).trim(), rs.getString(5).trim(),
+						rs.getString(6).trim() });
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -79,8 +97,8 @@ public class SetAllTable {
 			int i = 0;
 			while (rs.next()) {
 				model.addRow(
-						new Object[] { rs.getString(1), rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4),
-								rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), });
+						new Object[] { rs.getString(1).trim(), rs.getString(2).trim() + " " + rs.getString(3).trim() + " " + rs.getString(4).trim(),
+								rs.getString(5).trim(), rs.getString(6).trim(), rs.getString(7).trim(), rs.getString(8).trim(), rs.getString(9).trim(), });
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -96,7 +114,7 @@ public class SetAllTable {
 			rs = new FeesDb().getData(data);
 			int i = 0;
 			while (rs.next()) {
-				model.addRow(new Object[] { ++i, rs.getString(2), rs.getString(3), rs.getString(4), });
+				model.addRow(new Object[] { ++i, rs.getString(2).trim(), rs.getString(3).trim(), rs.getString(4).trim(), });
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -131,11 +149,11 @@ public class SetAllTable {
 			rs = new UsersDb().getData();
 			int i = 0;
 			while (rs.next()) {
-				model.addRow(new Object[] { ++i, rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),
-						rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13) });
+				model.addRow(new Object[] { ++i, rs.getString(1).trim(), rs.getString(2).trim(), rs.getString(3).trim(), rs.getString(4).trim(),
+						rs.getString(5).trim(), rs.getString(6).trim(), rs.getString(7).trim(), rs.getString(8).trim(), rs.getString(9).trim(),
+						rs.getString(10).trim(), rs.getString(11).trim(), rs.getString(12).trim(), rs.getString(13).trim() });
 				// set to dropdownlist
-				SettingsUI.selectUserCmb.addItem(rs.getString(1));
+				SettingsUI.selectUserCmb.addItem(rs.getString(1).trim());
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -214,4 +232,65 @@ public class SetAllTable {
 		}
 	}
 
+	public HashMap<String, Integer> getTotalFees() {
+		HashMap <String, Integer> hm = new HashMap<String, Integer>();
+		try {
+			rs = new FeesDb().getData();
+			int i = 0;
+			while (rs.next()) {
+				String id = rs.getString(1).trim();
+				if(hm.containsKey(id)){
+//					int oldFees = hm.get(id);
+					int newFees = hm.get(id) + Integer.parseInt(rs.getString(3).trim());
+					hm.put(id, newFees);
+				}else {
+					hm.put(rs.getString(1).trim(), Integer.parseInt(rs.getString(3).trim()));
+				}
+				
+			}
+			rs.close();
+			return hm;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+	public  void setHomeInfo() {
+		int pending=0;
+		int finished=0;
+		int active=0;
+		int closed=0;
+		double curMonthExp;
+		String status;
+		HashMap <String, Integer> hm = getTotalFees();
+		
+		try {
+			rs=new Student().getData();
+			while(rs.next()) {
+				
+				status=new FindStatus(hm.get(rs.getString(1).trim()), rs.getString(12).trim(), rs.getString(14).trim()).getStatus();
+				if(status.equals("PENDING")) {
+					pending=pending+1;
+				}
+				if(status.equals("FINISHED")) {
+					finished=finished+1;
+				}
+				if(rs.getString(15).trim().equals("ACTIVE")) {
+					active=active+1;
+				}
+				if(rs.getString(15).trim().equals("CLOSED")) {
+					closed=closed+1;
+				}
+			}
+			Home.finishedLbl.setText(finished+"");
+			Home.closedLbl.setText(closed+"");
+			Home.activeLbl.setText(active+"");
+			Home.pendingLbl.setText(pending+"");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

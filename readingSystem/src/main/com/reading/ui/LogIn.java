@@ -6,6 +6,10 @@
 package com.reading.ui;
 
 import java.awt.Color;
+import java.io.File;
+
+import com.reading.db.CreateTable;
+import com.reading.db.DBConnection;
 
 /**
  *
@@ -17,8 +21,15 @@ public class LogIn extends javax.swing.JFrame {
      * Creates new form LogIn
      */
     public LogIn() {
-        initComponents();
+
+    	initComponents();
         getContentPane().setBackground(Color.white);
+        String path=System.getProperty("user.home")+"\\reading\\sp";
+        new File(path).mkdir();
+		String str[]= {"--database.0",path,"--dbname.0","sp"};
+		new org.hsqldb.server.WebServer();
+		org.hsqldb.server.WebServer.main(str);
+		new CreateTable(new DBConnection().getConnection());
         this.setLocationRelativeTo(null);
     }
 

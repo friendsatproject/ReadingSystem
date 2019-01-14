@@ -20,10 +20,11 @@ public class FeesDb extends DBQuerys {
 
 	public FeesDb() {
 		con = new DBConnection().getConnection();
+		
 		set(hm, tableName, con);
 	}
 //	public static void main(String[] args) {
-//		new Student().drop();
+//		new FeesDb().drop();
 //		if(new FeesDb().createTable()) {
 //			JOptionPane.showConfirmDialog(null, "table created");
 //		}

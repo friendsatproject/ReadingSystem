@@ -9,8 +9,9 @@ public class ActionTrackerDb extends DBQuerys{
 	String tableName="ACTIONTRACKER";
 	Connection con=null;
 	LinkedHashMap<String,String> hm=new LinkedHashMap<String,String>(){{
+		put("ID","INTEGER IDENTITY");
 		put("DATE","char(10)");
-		put("ACTION","char(50)");
+		put("ACTION","char(100)");
 		put("TIME","char(15)");
 		put("USER","char(20)");
 		put("REFERENCE","char(15)");
@@ -23,7 +24,7 @@ public class ActionTrackerDb extends DBQuerys{
 //	public static void main(String[] args) {
 //		new ActionTrackerDb().drop();
 //		if(new ActionTrackerDb().createTable()) {
-//			JOptionPane.showConfirmDialog(null, "table created","",JOptionPane.INFORMATION_MESSAGE,JOptionPane.PLAIN_MESSAGE);
+//			JOptionPane.showMessageDialog(null, "table created","",JOptionPane.PLAIN_MESSAGE);
 //		}
 //	}
 }

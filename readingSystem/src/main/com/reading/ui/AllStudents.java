@@ -28,6 +28,8 @@ public class AllStudents extends javax.swing.JInternalFrame {
     JInternalFrame frame;
     Home home;
     HashMap<String, String> data = new HashMap<String, String>();
+    SetAllTable sat= new SetAllTable();
+    HashMap<String,Integer> totlFees;
 
     /**
      * Creates new form AllStudents
@@ -37,7 +39,8 @@ public class AllStudents extends javax.swing.JInternalFrame {
         initComponents();
         FormatFrame ff = new FormatFrame(this);
         ff.formatTable(table);
-        new SetAllTable().setActiveStudentTable(table);
+        totlFees = sat.getTotalFees();
+       sat.setActiveStudentTable(table,totlFees);
         new SearchTableData(searchText, table);
     }
 
@@ -67,11 +70,11 @@ public class AllStudents extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Student Id", "Name", "Mobile Number", "Gender", "Qualification", "Occupation", "Shift Type", "Fees Status"
+                "Sr.No.", " Id", "Name", "Mobile Number", "Gender", "Qualification", "Occupation", "Adhar No.", "Address", "Shift Type", "Fees"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -82,11 +85,18 @@ public class AllStudents extends javax.swing.JInternalFrame {
         table.setSelectionBackground(new java.awt.Color(255, 153, 0));
         jScrollPane1.setViewportView(table);
         if (table.getColumnModel().getColumnCount() > 0) {
-            table.getColumnModel().getColumn(0).setPreferredWidth(50);
-            table.getColumnModel().getColumn(2).setMinWidth(100);
-            table.getColumnModel().getColumn(2).setPreferredWidth(100);
-            table.getColumnModel().getColumn(2).setMaxWidth(100);
-            table.getColumnModel().getColumn(7).setPreferredWidth(100);
+            table.getColumnModel().getColumn(0).setResizable(false);
+            table.getColumnModel().getColumn(0).setPreferredWidth(30);
+            table.getColumnModel().getColumn(1).setPreferredWidth(30);
+            table.getColumnModel().getColumn(2).setPreferredWidth(200);
+            table.getColumnModel().getColumn(3).setPreferredWidth(90);
+            table.getColumnModel().getColumn(4).setPreferredWidth(30);
+            table.getColumnModel().getColumn(5).setPreferredWidth(80);
+            table.getColumnModel().getColumn(6).setPreferredWidth(80);
+            table.getColumnModel().getColumn(7).setPreferredWidth(80);
+            table.getColumnModel().getColumn(8).setPreferredWidth(200);
+            table.getColumnModel().getColumn(9).setPreferredWidth(80);
+            table.getColumnModel().getColumn(10).setPreferredWidth(50);
         }
 
         updateBtn.setText("Show Details");
@@ -107,7 +117,7 @@ public class AllStudents extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1030, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(updateBtn)
@@ -118,7 +128,7 @@ public class AllStudents extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateBtn)
@@ -142,9 +152,9 @@ public class AllStudents extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 743, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,11 +173,19 @@ public class AllStudents extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_updateBtnActionPerformed
-        String studId = (String) table.getValueAt(table.getSelectedRow(), 0);
+    	int row = table.getSelectedRow();
+        if (row >= 0) {
+    	
+    	String studId = (String) table.getValueAt(table.getSelectedRow(), 1);
         ShowStudentDetails frame = new ShowStudentDetails(studId);
         new SetAllTable().setStudentToFields(studId, frame);
         home.windo.add(frame);
         frame.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Please select Student Record", "Record not selected",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }// GEN-LAST:event_updateBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_deleteBtnActionPerformed
@@ -190,7 +208,7 @@ public class AllStudents extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(this, "Admission not closed, Something went wrong...", "Sawant Balaji", JOptionPane.ERROR_MESSAGE);
                     }
                     ((DefaultTableModel) table.getModel()).setRowCount(0);
-                    new SetAllTable().setActiveStudentTable(table);
+                    sat.setActiveStudentTable(table,totlFees);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -207,8 +225,8 @@ public class AllStudents extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField searchText;
-    private javax.swing.JTable table;
+    public static javax.swing.JTextField searchText;
+    public javax.swing.JTable table;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 

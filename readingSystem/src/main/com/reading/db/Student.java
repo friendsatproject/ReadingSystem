@@ -1,7 +1,6 @@
 package com.reading.db;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 
 public class Student extends DBQuerys {
@@ -41,7 +40,10 @@ public class Student extends DBQuerys {
 		}
 	}
 //	public static void main(String[] args) {
-//		new Student().drop();
+////		String path=System.getProperty("System.dir");
+////		String str[]= {};
+////		new org.hsqldb.server.WebServer().main(str);
+////		new Student().drop();
 //		new Student().createTable();
 //	}
 }

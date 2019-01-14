@@ -4,10 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
-import javax.swing.JOptionPane;
-
 import com.reading.db.ActionTrackerDb;
-import com.reading.ui.ActionTracker;
+import com.reading.ui.Home;
 
 public class ActionTrackerHM {
 	 
@@ -23,7 +21,7 @@ public class ActionTrackerHM {
 		data.put("DATE", dt.format(new Date()));
 		data.put("ACTION", action);
 		data.put("TIME", tf.format(new Date()));
-		data.put("USER", "USER");
+		data.put("USER", Home.user);
 		data.put("REFERENCE", reference);
 		
 //		if(new ExpencesDb().createTable()) {

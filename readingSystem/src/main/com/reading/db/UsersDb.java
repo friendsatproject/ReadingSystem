@@ -25,10 +25,4 @@ public class UsersDb extends DBQuerys{
 		con=new DBConnection().getConnection();
 		set(hm,tableName,con);
 	}
-//	public static void main(String[] args) {
-//		new UsersDb().drop();
-//		if(new UsersDb().createTable()) {
-//			System.out.println("table created");
-//		}
-//	}
 }

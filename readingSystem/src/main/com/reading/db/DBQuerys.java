@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public abstract class DBQuerys {
 	LinkedHashMap<String,String> hm=new LinkedHashMap<String,String>();
@@ -107,7 +108,9 @@ public abstract class DBQuerys {
 		StringBuilder sql=new StringBuilder("select * from "+tableName);
 		try {
 			Statement stmt=con.createStatement();
-			return stmt.executeQuery(sql.toString());
+			ResultSet rs= stmt.executeQuery(sql.toString());
+			con.close();
+			return rs;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -123,7 +126,9 @@ public abstract class DBQuerys {
 			
 		try {
 			Statement stmt=con.createStatement();
-			return stmt.executeQuery(sql.toString());
+			ResultSet rs=stmt.executeQuery(sql.toString());
+			con.close();
+			return rs;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -138,6 +143,24 @@ public abstract class DBQuerys {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+	}
+	public void tableVerify(List<String> tableName) {
+		if(!tableName.contains("ACTIONTRACKER")) {
+			new ActionTrackerDb().createTable();
+		}
+		if(!tableName.contains("STUDENT")) {
+			new Student().createTable();
+		}if(!tableName.contains("USER")) {
+			new UsersDb().createTable();
+		}if(!tableName.contains("FIXEDFEES")) {
+			new FixedFeesDb().createTable();
+		}if(!tableName.contains("FEES")) {
+			new FeesDb().createTable();
+		}if(!tableName.contains("EXPENCES")) {
+			new ExpencesDb().createTable();
+		}
+		
 		
 	}
 }

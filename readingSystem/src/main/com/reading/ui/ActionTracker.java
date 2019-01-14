@@ -52,11 +52,11 @@ public class ActionTracker extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Date", "Time", "Action", "User", "Reference"
+                "Sr.No.", "Date", "Time", "Action", "User", "Reference"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -66,6 +66,16 @@ public class ActionTracker extends javax.swing.JInternalFrame {
         table.setRowHeight(25);
         table.setSelectionBackground(new java.awt.Color(255, 153, 0));
         jScrollPane1.setViewportView(table);
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(0).setResizable(false);
+            table.getColumnModel().getColumn(0).setPreferredWidth(30);
+            table.getColumnModel().getColumn(1).setResizable(false);
+            table.getColumnModel().getColumn(1).setPreferredWidth(60);
+            table.getColumnModel().getColumn(2).setPreferredWidth(60);
+            table.getColumnModel().getColumn(3).setPreferredWidth(500);
+            table.getColumnModel().getColumn(4).setPreferredWidth(80);
+            table.getColumnModel().getColumn(5).setPreferredWidth(80);
+        }
 
         jLabel1.setText("Search");
 

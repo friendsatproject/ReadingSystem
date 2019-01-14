@@ -19,4 +19,7 @@ public class ExpencesDb extends DBQuerys{
 		con=new DBConnection().getConnection();
 		set(hm,tableName,con);
 	}
+//	public static void main(String args[]) {
+//		System.out.println(new ExpencesDb().createTable());
+//	}
 }
