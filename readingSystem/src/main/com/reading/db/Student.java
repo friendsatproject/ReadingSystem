@@ -28,6 +28,7 @@ public class Student extends DBQuerys {
 
 			put("JOINDATE", "char(12)");
 			put("STATUS", "char(7)");
+			
 		}
 	};
 

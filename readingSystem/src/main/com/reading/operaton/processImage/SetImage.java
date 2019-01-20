@@ -1,4 +1,4 @@
-package com.reading.operaton;
+package com.reading.operaton.processImage;
 
 import java.awt.Image;
 

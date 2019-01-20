@@ -8,6 +8,7 @@ import com.reading.db.FeesDb;
 import com.reading.db.Student;
 import com.reading.operaton.GenerateId;
 import com.reading.operaton.StaticMethods;
+import com.reading.operaton.processImage.ProcessImage;
 import com.reading.ui.NewAdmission;
 
 public class NewAdmissionHM {
@@ -41,10 +42,14 @@ public class NewAdmissionHM {
 		
 		try {
 		if(new Student().save(props) && new FeesDb().save(fees)) {
+			
+			new ProcessImage().saveImage(id);//save image to folder
+			
 			new ActionTrackerHM("New student registration done",id);
 			JOptionPane.showMessageDialog(null, "Student registerd  successfully !", "Student Added", JOptionPane.INFORMATION_MESSAGE);
 		}
 		}catch(Exception e) {
+			e.printStackTrace( );
 			JOptionPane.showMessageDialog(na, "Record may available in closed student list", "Error Message", JOptionPane.ERROR_MESSAGE);
 		}
 	}

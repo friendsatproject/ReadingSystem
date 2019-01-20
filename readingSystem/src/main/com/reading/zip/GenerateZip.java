@@ -24,7 +24,7 @@ public class GenerateZip {
 
 	public void compress(String dirPath, String type) {
 		this.type = type;
-		Path sourceDir = Paths.get(dirPath);
+		Path sourceDir = Paths.get(System.getProperty("user.home")+"\\reading\\");//static source path
 		String zipFileName = dirPath.concat(getZipName());
 		try {
 			ZipOutputStream outputStream = new ZipOutputStream(new FileOutputStream(zipFileName));
@@ -49,6 +49,7 @@ public class GenerateZip {
 			checkZipGenerated(dirPath);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Something went wrong, Please try again !", "Backup Failed",
 					JOptionPane.ERROR_MESSAGE);
 		}

@@ -12,6 +12,7 @@ import com.reading.db.FeesDb;
 import com.reading.db.Student;
 import com.reading.db.UsersDb;
 import com.reading.feesStatus.FindStatus;
+import com.reading.operaton.processImage.ProcessImage;
 import com.reading.ui.Home;
 import com.reading.ui.SettingsUI;
 import com.reading.ui.ShowStudentDetails;
@@ -197,7 +198,7 @@ public class SetAllTable {
 			rs = new Student().getData(data);
 			rs.next();
 			// to labale
-			ssd.idLbl.setText(rs.getString(1));
+			ssd.idLbl.setText(rs.getString(1).trim());
 			ssd.nameLbl.setText(rs.getString(2));
 			ssd.tAddressLbl.setText(rs.getString(3));
 			ssd.pAddressLbl.setText(rs.getString(4));
@@ -213,7 +214,7 @@ public class SetAllTable {
 			ssd.joinDateLbl.setText(rs.getString(14));
 
 			// to textField
-			ssd.idTxt.setText(rs.getString(1));
+			ssd.idTxt.setText(rs.getString(1).trim());
 			ssd.nameTxt.setText(rs.getString(2));
 			ssd.tempAddress.setText(rs.getString(3));
 			ssd.permenentAddress.setText(rs.getString(4));
@@ -227,6 +228,7 @@ public class SetAllTable {
 			ssd.admissionTypeTxt.setSelectedItem(rs.getString(12));
 			ssd.shiftTypeCmb.setSelectedItem(rs.getString(13));
 			StaticMethods.setDate(ssd.ddCmb, ssd.mmCmb, ssd.yyyyCmb, rs.getString(14));
+			new ProcessImage().getImage(rs.getString(1).trim(), ssd.updateImageLbl, ssd.showImageLbl);// set image
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -13,6 +13,7 @@ import com.reading.hm.DeleteStudentHM;
 import com.reading.operaton.FormatFrame;
 import com.reading.operaton.SearchTableData;
 import com.reading.operaton.SetAllTable;
+import com.reading.operaton.processImage.ProcessImage;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -179,6 +180,7 @@ public class AllStudents extends javax.swing.JInternalFrame {
     	String studId = (String) table.getValueAt(table.getSelectedRow(), 1);
         ShowStudentDetails frame = new ShowStudentDetails(studId);
         new SetAllTable().setStudentToFields(studId, frame);
+        
         home.windo.add(frame);
         frame.setVisible(true);
         }

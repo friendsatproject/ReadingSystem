@@ -10,7 +10,7 @@ public class FindTotalAmount {
 		int[] rows = table.getSelectedRows();
 		
 		for(int i=0;i<=rows.length-1;i++) {
-			amount = amount+Integer.parseInt((String) table.getValueAt(rows[i], 2));
+			amount = amount+Integer.parseInt((String) table.getValueAt(rows[i], 3));
 		}
 		text.setText(amount+"");
 	}

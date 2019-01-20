@@ -81,7 +81,6 @@ public class Expences extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Expence Summary");
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
@@ -105,7 +104,6 @@ public class Expences extends javax.swing.JInternalFrame {
             }
 
         });
-        table.setColumnSelectionAllowed(true);
         table.setRowHeight(20);
         table.setSelectionBackground(new java.awt.Color(255, 204, 0));
         table.getTableHeader().setReorderingAllowed(false);
@@ -115,7 +113,6 @@ public class Expences extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(table);
-        table.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 

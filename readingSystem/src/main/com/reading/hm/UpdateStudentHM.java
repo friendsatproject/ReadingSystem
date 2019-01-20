@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import com.reading.db.Student;
 import com.reading.operaton.StaticMethods;
+import com.reading.operaton.processImage.ProcessImage;
 import com.reading.ui.ShowStudentDetails;
 
 public class UpdateStudentHM {
@@ -38,6 +39,9 @@ public class UpdateStudentHM {
 		};
 		try {
 			if (new Student().update(props)) {
+				
+				new ProcessImage().saveImage(s.idTxt.getText());//save image to folder
+				
 				new ActionTrackerHM("Student Information Updated", s.idTxt.getText());
 				JOptionPane.showMessageDialog(null, "Student information updated  successfully !", "Student Updated",
 						JOptionPane.INFORMATION_MESSAGE);
