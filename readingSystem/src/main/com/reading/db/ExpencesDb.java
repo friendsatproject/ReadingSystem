@@ -9,10 +9,10 @@ public class ExpencesDb extends DBQuerys{
 	LinkedHashMap<String,String> hm=new LinkedHashMap<String,String>(){{
 		put("ID","char(20) primary key");
 		put("EXPENCETYPE","char(50)");
-		put("AMOUNT","char(50)");
-		put("DATE","char(50)");
+		put("AMOUNT","char(5)");
+		put("DATE","char(12)");
 		put("DESCRIPTION","char(50)");
-		put("USER","char(50)");
+		put("USER","char(20)");
 		
 	}};
 	public ExpencesDb(){

@@ -21,6 +21,7 @@ public class ProcessImage {
 	String location = LogIn.homePath + "//reading//images//";
 
 	public void saveImage(String id) {
+		new File(location).mkdirs();
 		if (ImageSelector.photoPath != null) {
 
 			File file = new File(ImageSelector.photoPath);

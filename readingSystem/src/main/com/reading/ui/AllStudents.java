@@ -180,7 +180,7 @@ public class AllStudents extends javax.swing.JInternalFrame {
     	String studId = (String) table.getValueAt(table.getSelectedRow(), 1);
         ShowStudentDetails frame = new ShowStudentDetails(studId);
         new SetAllTable().setStudentToFields(studId, frame);
-        
+        home.frame2=frame;
         home.windo.add(frame);
         frame.setVisible(true);
         }
@@ -201,10 +201,10 @@ public class AllStudents extends javax.swing.JInternalFrame {
 
                 LinkedHashMap<String, Object> record = new LinkedHashMap<String, Object>();
                 try {
-                    record.put("ID", (String) table.getValueAt(row, 0));
+                    record.put("ID", (String) table.getValueAt(row, 1).toString().trim());
                     record.put("STATUS", "CLOSED");
                     if (new Student().update(record)) {
-                        new ActionTrackerHM("Admission Closed", (String) table.getValueAt(table.getSelectedRow(), 0));
+                        new ActionTrackerHM("Admission Closed", (String) table.getValueAt(table.getSelectedRow(), 1));
                         JOptionPane.showMessageDialog(this, "Student admission closed sucessfully !", "Admission closed", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(this, "Admission not closed, Something went wrong...", "Sawant Balaji", JOptionPane.ERROR_MESSAGE);

@@ -11,7 +11,7 @@ public class DBConnection {
 			
 		     Class.forName("org.hsqldb.jdbc.JDBCDriver");
 			Connection c = DriverManager.getConnection("jdbc:hsqldb:http://localhost/sp", "SA", "");
-			System.out.println(c);
+//			System.out.println(c);
 			
 			return c;
 //			return DriverManager.getConnection ("jdbc:h2:~/test", "sa","sa");

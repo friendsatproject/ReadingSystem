@@ -20,10 +20,12 @@ public class FixedFeesDb extends DBQuerys {
 	Connection con = null;
 	LinkedHashMap<String, String> hm = new LinkedHashMap<String, String>() {
 		{
-			put("MONTHLY", "char(10)");
-			put("QUARTERLY", "char(10)");
-			put("HALFYEARLY", "char(10)");
-			put("YEARLY", "char(10)");
+			put("ID", "char(1)");
+			put("TYPE", "char(2)");
+			put("MONTHLY", "char(5)");
+			put("QUARTERLY", "char(5)");
+			put("HALFYEARLY", "char(5)");
+			put("YEARLY", "char(5)");
 		}
 	};
 

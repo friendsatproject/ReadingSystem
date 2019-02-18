@@ -2,16 +2,18 @@ package com.reading.operaton;
 
 import java.util.Random;
 
+import com.reading.ui.Home;
+
 public class GenerateId {
 
 	public static String getStudentId(String name, String adhar) {
-		String id = name.substring(0,1) + adhar.substring(adhar.length() - 2) + getRandomNo();
+		String id = name.substring(0,1) + getRandomNo() + getRandomNo();
 		System.out.println("generated id :"+id+":");
 		return id.trim();
 	}
 
 	public static String getExpenceId(String user, String amount) {
-		String id = user.substring(0, 1) + amount.substring(0) + getRandomNo();
+		String id = Home.user.substring(0, 1) + amount.substring(0) + getRandomNo();
 		System.out.println("generated id :"+id+":");
 		return id;
 	}

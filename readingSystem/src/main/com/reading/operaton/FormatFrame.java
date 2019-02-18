@@ -29,6 +29,9 @@ public class FormatFrame {
         frame.getContentPane().setBackground(Color.white);
 
     }
+    public void formatUpdateFees(){
+         frame.setBounds(0, 315, (int) width - 195, (int) height - 380);
+    }
 
     public void formatAddNewExpence() {
         frame.setBounds(0, 0, (int) width - 195, (int) height - 370);

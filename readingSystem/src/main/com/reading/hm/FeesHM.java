@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import javax.swing.JOptionPane;
 
 import com.reading.db.FeesDb;
+import com.reading.ui.Home;
 import com.reading.ui.NewAdmission;
 
 public class FeesHM {
@@ -16,7 +17,7 @@ public class FeesHM {
         props.put("ID", id);
         props.put("DATE", new SimpleDateFormat("dd-MM-YYYY").format(new Date()));
         props.put("AMOUNT", amount);
-        props.put("RECEIVER", "user");
+        props.put("RECEIVER", Home.user);
 
         if (new FeesDb().save(props)) {
             new ActionTrackerHM("Fees Submited", id);

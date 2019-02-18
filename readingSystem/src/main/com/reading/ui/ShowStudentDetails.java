@@ -7,12 +7,14 @@ import java.util.LinkedHashMap;
 
 import javax.swing.table.DefaultTableModel;
 
+import com.reading.db.SmsDb;
 import com.reading.hm.FeesHM;
 import com.reading.hm.UpdateStudentHM;
 import com.reading.operaton.FormatFrame;
 import com.reading.operaton.SetAllTable;
 import com.reading.operaton.processImage.ImageSelector;
-import com.reading.operaton.processImage.ProcessImage;
+import com.reading.regx.RegX;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,6 +29,7 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
 
     LinkedHashMap<String,Object> oldDataHm ;
     ResultSet rs;
+    RegX regx = new RegX();
 
     /**
      * Creates new form ShowStudentDetails
@@ -111,8 +114,6 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
         nameTxt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         mobileNoTxt = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
-        alternateMoNoTxt = new javax.swing.JTextField();
         maleRdo = new javax.swing.JRadioButton();
         femaleRdo = new javax.swing.JRadioButton();
         otherRdo = new javax.swing.JRadioButton();
@@ -141,6 +142,8 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
         updateImageLbl = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         parentMoNoTxt = new javax.swing.JTextField();
+        alternateMoNoTxt = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
         updateStudentBtn = new javax.swing.JButton();
         CancelBtn = new javax.swing.JButton();
 
@@ -155,6 +158,12 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
         jLabel7.setText("Submit Fees");
 
         jLabel34.setText("Amount");
+
+        submitFeesTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                submitFeesTxtKeyReleased(evt);
+            }
+        });
 
         sbmitFeesBtn.setText("Submit");
         sbmitFeesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -518,9 +527,31 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
 
         jLabel24.setText("Gender");
 
+        qualificationTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                qualificationTxtKeyReleased(evt);
+            }
+        });
+
+        adharTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                adharTxtKeyReleased(evt);
+            }
+        });
+
+        nameTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameTxtKeyReleased(evt);
+            }
+        });
+
         jLabel4.setText("Mobile Number");
 
-        jLabel25.setText("Alternate Mobile Number");
+        mobileNoTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                mobileNoTxtKeyReleased(evt);
+            }
+        });
 
         maleRdo.setBackground(new java.awt.Color(255, 255, 255));
         maleRdo.setSelected(true);
@@ -547,18 +578,34 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
             }
         });
 
+        occupationTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                occupationTxtKeyReleased(evt);
+            }
+        });
+
         jLabel27.setText("Occupation");
 
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         tempAddress.setColumns(20);
         tempAddress.setRows(5);
+        tempAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tempAddressKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(tempAddress);
 
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         permenentAddress.setColumns(20);
         permenentAddress.setRows(5);
+        permenentAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                permenentAddressKeyReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(permenentAddress);
 
         jLabel29.setText("Permenent Address");
@@ -603,27 +650,37 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(updateImageLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+            .addComponent(updateImageLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(updateImageLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+            .addComponent(updateImageLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
         );
 
         jLabel26.setText("Parent's Mobile Number");
+
+        parentMoNoTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                parentMoNoTxtKeyReleased(evt);
+            }
+        });
+
+        alternateMoNoTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                alternateMoNoTxtKeyReleased(evt);
+            }
+        });
+
+        jLabel25.setText("Alternate Mo. Number");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(parentMoNoTxt))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGap(0, 33, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel35)
                             .addComponent(jLabel8)
@@ -633,7 +690,7 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(browsImageLbl)
-                                .addGap(42, 42, 42)
+                                .addGap(27, 27, 27)
                                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel7Layout.createSequentialGroup()
@@ -645,13 +702,25 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel16))
                                 .addComponent(shiftTypeCmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(admissionTypeTxt, 0, 288, Short.MAX_VALUE)))))
-                .addContainerGap(121, Short.MAX_VALUE))
+                                .addComponent(admissionTypeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel26)
+                            .addComponent(jLabel25))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(alternateMoNoTxt)
+                            .addComponent(parentMoNoTxt))))
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(alternateMoNoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
                     .addComponent(parentMoNoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -670,13 +739,16 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
                     .addComponent(admissionTypeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel17)
-                        .addComponent(browsImageLbl))
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(172, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(browsImageLbl)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(83, 83, 83))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -688,10 +760,9 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel25)
                             .addComponent(jLabel4)
                             .addComponent(jLabel24))
-                        .addGap(18, 18, 18)
+                        .addGap(66, 66, 66)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(maleRdo)
@@ -699,7 +770,6 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
                                 .addComponent(femaleRdo)
                                 .addGap(18, 18, 18)
                                 .addComponent(otherRdo))
-                            .addComponent(alternateMoNoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(mobileNoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -719,13 +789,14 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
                             .addComponent(jScrollPane2)
                             .addComponent(jScrollPane3)
                             .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
                     .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -763,21 +834,18 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(mobileNoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(alternateMoNoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel25))
-                .addContainerGap(44, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -807,24 +875,23 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(updateStudentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(CancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateStudentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Update Student Detail", jPanel2);
@@ -833,11 +900,11 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(932, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -854,7 +921,11 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
 
     public void updateStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStudentBtnActionPerformed
         // TODO add your handling code here:
+         if (!nameTxt.getText().isEmpty() && !tempAddress.getText().isEmpty() && !mobileNoTxt.getText().isEmpty()) {
         new UpdateStudentHM(this);
+        }else{
+            JOptionPane.showMessageDialog(this, "Name, Address, Mobile Number and Fees Paid are mandatory fields","Success Park",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_updateStudentBtnActionPerformed
 
     private void maleRdoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleRdoActionPerformed
@@ -880,13 +951,67 @@ public class ShowStudentDetails extends javax.swing.JInternalFrame {
         new FeesHM(submitFeesTxt.getText(),idLbl.getText());
         ((DefaultTableModel) table.getModel()).addRow(new Object[] {
             ((DefaultTableModel) table.getModel()).getRowCount()+1, new SimpleDateFormat("dd-MM-YYYY").format(new Date()),
-            submitFeesTxt.getText(), "USER",});
+            submitFeesTxt.getText(), Home.user});
+        
+        LinkedHashMap<String,Object> lhm = new LinkedHashMap<String ,Object>();
+        lhm.put("ID", idLbl.getText());
+        new SmsDb().delete(lhm);
     }//GEN-LAST:event_sbmitFeesBtnActionPerformed
 
     private void browsImageLblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsImageLblActionPerformed
         // TODO add your handling code here:
     	new ImageSelector(updateImageLbl);
     }//GEN-LAST:event_browsImageLblActionPerformed
+
+    private void submitFeesTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_submitFeesTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\d]{0,5})", submitFeesTxt, 5);
+    }//GEN-LAST:event_submitFeesTxtKeyReleased
+
+    private void nameTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([a-zA-Z\\s]{3,49})", nameTxt, 49);
+    }//GEN-LAST:event_nameTxtKeyReleased
+
+    private void tempAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tempAddressKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\s\\w,.]{0,49})", tempAddress, 69);
+    }//GEN-LAST:event_tempAddressKeyReleased
+
+    private void permenentAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_permenentAddressKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\s\\w,.]{0,49})", permenentAddress, 69);
+    }//GEN-LAST:event_permenentAddressKeyReleased
+
+    private void adharTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_adharTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\d]{12})", adharTxt, 12);
+    }//GEN-LAST:event_adharTxtKeyReleased
+
+    private void qualificationTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_qualificationTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\s\\w]{0,49})", qualificationTxt, 49);
+    }//GEN-LAST:event_qualificationTxtKeyReleased
+
+    private void occupationTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_occupationTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\s\\w]{0,19})", occupationTxt, 19);
+    }//GEN-LAST:event_occupationTxtKeyReleased
+
+    private void mobileNoTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mobileNoTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\d]{10})", mobileNoTxt, 10);
+    }//GEN-LAST:event_mobileNoTxtKeyReleased
+
+    private void alternateMoNoTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_alternateMoNoTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\d]{10})", alternateMoNoTxt, 10);
+    }//GEN-LAST:event_alternateMoNoTxtKeyReleased
+
+    private void parentMoNoTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_parentMoNoTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\d]{10})", parentMoNoTxt, 10);
+    }//GEN-LAST:event_parentMoNoTxtKeyReleased
 
     public void CancelBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:

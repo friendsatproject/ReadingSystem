@@ -9,6 +9,8 @@ import com.reading.ui.SettingsUI;
 
 public class UsersHM {
 	public UsersHM(SettingsUI sui) {
+		String joinDate = sui.dd.getSelectedItem().toString() + sui.mm.getSelectedItem().toString()
+				+ sui.yy.getSelectedItem().toString();
 		LinkedHashMap<String, Object> props = new LinkedHashMap<String, Object>();
 		props.put("ID", sui.uidTxt1.getText());
 		props.put("PASSWORD", sui.passwordTxt1.getText());
@@ -16,11 +18,16 @@ public class UsersHM {
 		props.put("ADDRESS", sui.addressTxt1.getText());
 		props.put("MOBILE", sui.moNoTxt1.getText());
 		props.put("ALTERNATEMO", sui.ulternateMoNoTxt1.getText());
-		props.put("GENDER", sui.genderTxt1.getText());
+		if (sui.male.isSelected())
+			props.put("GENDER", "MALE");
+		if (sui.female.isSelected())
+			props.put("GENDER", "FEMALE");
+		if (sui.other.isSelected())
+			props.put("GENDER", "OTHER");
 		props.put("ADHAR", sui.adharTxt1.getText());
 		props.put("QUALIFICATION", sui.qualificationTxt1.getText());
 		props.put("OCCUPATION", sui.occupationTxt1.getText());
-		props.put("JOINDATE", sui.joinDateTxt1.getText());
+		props.put("JOINDATE", joinDate);
 		props.put("SALLARY", sui.sallaryTxt1.getText());
 		props.put("USERTYPE", sui.userTypeCmb1.getSelectedItem());
 

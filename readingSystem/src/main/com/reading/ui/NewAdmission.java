@@ -7,8 +7,11 @@ package com.reading.ui;
 
 import com.reading.hm.NewAdmissionHM;
 import com.reading.operaton.FormatFrame;
+import com.reading.operaton.SetAllTable;
 import com.reading.operaton.StaticMethods;
 import com.reading.operaton.processImage.ImageSelector;
+import com.reading.regx.RegX;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,17 +19,17 @@ import com.reading.operaton.processImage.ImageSelector;
  */
 public class NewAdmission extends javax.swing.JInternalFrame {
 
-	
+    RegX regx = new RegX();
+
     /**
      * Creates new form NewAdmission
      */
     public NewAdmission() {
         initComponents();
         new FormatFrame(this);
-        StaticMethods.setDateToCmb(ddCmb,mmCmb,yyyyCmb,currentDateCB);
+        StaticMethods.setDateToCmb(ddCmb, mmCmb, yyyyCmb, currentDateCB);
     }
 
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -113,11 +116,47 @@ public class NewAdmission extends javax.swing.JInternalFrame {
 
         jLabel15.setText("Gender");
 
+        qualificationTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                qualificationTxtKeyReleased(evt);
+            }
+        });
+
+        adharTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                adharTxtKeyReleased(evt);
+            }
+        });
+
+        nameTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameTxtKeyReleased(evt);
+            }
+        });
+
         jLabel4.setText("Mobile Number");
+
+        mobileNoTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                mobileNoTxtKeyReleased(evt);
+            }
+        });
 
         jLabel13.setText("Alternate Mobile Number");
 
+        alternateMoNoTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                alternateMoNoTxtKeyReleased(evt);
+            }
+        });
+
         jLabel14.setText("Parent's Mobile Number");
+
+        parentMoNoTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                parentMoNoTxtKeyReleased(evt);
+            }
+        });
 
         maleRdo.setBackground(new java.awt.Color(255, 255, 255));
         maleRdo.setSelected(true);
@@ -144,6 +183,12 @@ public class NewAdmission extends javax.swing.JInternalFrame {
             }
         });
 
+        occupationTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                occupationTxtKeyReleased(evt);
+            }
+        });
+
         jLabel9.setText("Occupation");
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -152,6 +197,11 @@ public class NewAdmission extends javax.swing.JInternalFrame {
         tempAddress.setColumns(20);
         tempAddress.setLineWrap(true);
         tempAddress.setRows(5);
+        tempAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tempAddressKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tempAddress);
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -160,6 +210,11 @@ public class NewAdmission extends javax.swing.JInternalFrame {
         permenentAddress.setColumns(20);
         permenentAddress.setLineWrap(true);
         permenentAddress.setRows(5);
+        permenentAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                permenentAddressKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(permenentAddress);
 
         jLabel12.setText("Permenent Address");
@@ -168,15 +223,31 @@ public class NewAdmission extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Shift Type");
 
-        shiftTypeCmb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Type", "Day", "Day-Night", "Night" }));
+        shiftTypeCmb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Day", "Day-Night", "Night" }));
+        shiftTypeCmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shiftTypeCmbActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Admission Type");
 
         admissionTypeTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "For One Month", "For Three Month", "For Six Month", "For Year" }));
+        admissionTypeTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                admissionTypeTxtActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Total Fees ");
 
         jLabel11.setText("Paid Fees");
+
+        feesPaidTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                feesPaidTxtKeyReleased(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -468,7 +539,7 @@ public class NewAdmission extends javax.swing.JInternalFrame {
 
     private void browsImageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsImageBtnActionPerformed
         // TODO add your handling code here:
-    	new ImageSelector(imageLbl);
+        new ImageSelector(imageLbl);
     }//GEN-LAST:event_browsImageBtnActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
@@ -478,9 +549,72 @@ public class NewAdmission extends javax.swing.JInternalFrame {
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
-        new NewAdmissionHM(this);
-
+        if (!nameTxt.getText().isEmpty() && !tempAddress.getText().isEmpty() && !mobileNoTxt.getText().isEmpty() && !feesPaidTxt.getText().isEmpty()) {
+            new NewAdmissionHM(this);
+        }else{
+            JOptionPane.showMessageDialog(this, "Name, Address, Mobile Number and Fees Paid are mandatory fields","Success Park",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void shiftTypeCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shiftTypeCmbActionPerformed
+        // TODO add your handling code here:
+        totalFeesLbl.setText(new SetAllTable().getFees((String) admissionTypeTxt.getSelectedItem(), (String) shiftTypeCmb.getSelectedItem()));
+    }//GEN-LAST:event_shiftTypeCmbActionPerformed
+
+    private void admissionTypeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admissionTypeTxtActionPerformed
+        // TODO add your handling code here:
+        totalFeesLbl.setText(new SetAllTable().getFees((String) admissionTypeTxt.getSelectedItem(), (String) shiftTypeCmb.getSelectedItem()));
+    }//GEN-LAST:event_admissionTypeTxtActionPerformed
+
+    private void nameTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([a-zA-Z\\s]{3,49})", nameTxt, 49);
+    }//GEN-LAST:event_nameTxtKeyReleased
+
+    private void tempAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tempAddressKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\s\\w,.]{0,49})", tempAddress, 69);
+    }//GEN-LAST:event_tempAddressKeyReleased
+
+    private void permenentAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_permenentAddressKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\s\\w,.]{0,49})", permenentAddress, 69);
+    }//GEN-LAST:event_permenentAddressKeyReleased
+
+    private void adharTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_adharTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\d]{12})", adharTxt, 12);
+    }//GEN-LAST:event_adharTxtKeyReleased
+
+    private void qualificationTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_qualificationTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\s\\w]{0,49})", qualificationTxt, 49);
+    }//GEN-LAST:event_qualificationTxtKeyReleased
+
+    private void occupationTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_occupationTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\s\\w]{0,19})", occupationTxt, 19);
+    }//GEN-LAST:event_occupationTxtKeyReleased
+
+    private void mobileNoTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mobileNoTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\d]{10})", mobileNoTxt, 10);
+    }//GEN-LAST:event_mobileNoTxtKeyReleased
+
+    private void alternateMoNoTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_alternateMoNoTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\d]{10})", alternateMoNoTxt, 10);
+    }//GEN-LAST:event_alternateMoNoTxtKeyReleased
+
+    private void parentMoNoTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_parentMoNoTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\d]{10})", parentMoNoTxt, 10);
+    }//GEN-LAST:event_parentMoNoTxtKeyReleased
+
+    private void feesPaidTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_feesPaidTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\d]{0,5})", feesPaidTxt, 5);
+    }//GEN-LAST:event_feesPaidTxtKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

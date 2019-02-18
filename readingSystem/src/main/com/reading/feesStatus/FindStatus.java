@@ -9,15 +9,16 @@ public class FindStatus {
 	int month;
 	int admissionType;// = 3;// from student table
 	String joinDate;// = "20-10-2018";// from student table
-	
+
 	FindMonth fm = new FindMonth();
-	
-	public FindStatus(int totalFeesPaid,String admissionType,String joinDate ) {
+
+	public FindStatus(int totalFeesPaid, String admissionType, String joinDate,String totalFees) {
 		this.totalFeesPaid = totalFeesPaid;
-		this.admissionType =getType(admissionType);
-		this.joinDate=joinDate;
+		this.admissionType = getType(admissionType);
+		this.joinDate = joinDate;
+		this.totalFees=Integer.parseInt(totalFees);
 	}
-	
+
 	public String getStatus() {
 		month = fm.getMonth(joinDate);
 		try {
@@ -27,19 +28,16 @@ public class FindStatus {
 
 				feesToCompare = totalFeesPaid / ((month + 1) * feesPerMonth);
 				if (feesToCompare > 1) {
-					return "CLEAR";
+					return "PAID";
 				} else {
-					return "FINISHED";
+					return "PENDING";
 				}
 			} else {
 				feesPerMonth = (totalFees / admissionType);
 				if (feesPerMonth <= totalFeesPaid) {
-					return "CLEAR";
-				}else if(feesPerMonth >= totalFeesPaid) {
-					return "";
-				}
-				else {
-					return "FINISHED";
+					return "PAID";
+				} else {
+					return "PENDING";
 				}
 			}
 		} catch (Exception e) {
@@ -47,14 +45,20 @@ public class FindStatus {
 			return null;
 		}
 	}
+
 	public int getType(String type) {
 		String[] arr = type.split(" ");
-		switch(arr[1]){
-		case "One": return 1;
-		case "Three": return 3;
-		case "Six" : return 6;
-		case "Year" : return 12;
-		default: return 0;
+		switch (arr[1]) {
+		case "One":
+			return 1;
+		case "Three":
+			return 3;
+		case "Six":
+			return 6;
+		case "Year":
+			return 12;
+		default:
+			return 0;
 		}
 	}
 

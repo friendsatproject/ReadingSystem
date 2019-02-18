@@ -10,6 +10,7 @@ import com.reading.hm.AddExpenceHm;
 import com.reading.operaton.FindTotalAmount;
 import com.reading.operaton.FormatFrame;
 import com.reading.operaton.SetAllTable;
+import com.reading.regx.RegX;
 import java.awt.Color;
 
 /*
@@ -25,7 +26,7 @@ public class Expences extends javax.swing.JInternalFrame {
 
     TableRowSorter<TableModel> sorter;
     Home home;
-
+    RegX regx = new RegX();
     /**
      * Creates new form Expences
      */
@@ -206,14 +207,32 @@ public class Expences extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Expence Type");
 
+        eTypeTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                eTypeTxtKeyReleased(evt);
+            }
+        });
+
         jLabel7.setText("Amount");
+
+        amountTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                amountTxtKeyReleased(evt);
+            }
+        });
 
         jLabel8.setText("Description");
 
         descriptionTxt.setColumns(20);
         descriptionTxt.setRows(5);
+        descriptionTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                descriptionTxtKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(descriptionTxt);
 
+        cancelBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cancelBtn.setText("Cancel");
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,6 +240,7 @@ public class Expences extends javax.swing.JInternalFrame {
             }
         });
 
+        saveBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         saveBtn.setText("Save");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,9 +256,9 @@ public class Expences extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(saveBtn)
-                        .addGap(39, 39, 39)
-                        .addComponent(cancelBtn))
+                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -275,8 +295,8 @@ public class Expences extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelBtn)
-                    .addComponent(saveBtn))
+                    .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -350,6 +370,21 @@ public class Expences extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_searchTextKeyReleased
 
+    private void eTypeTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_eTypeTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\w\\s]{1,49})", eTypeTxt, 49);
+    }//GEN-LAST:event_eTypeTxtKeyReleased
+
+    private void amountTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amountTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\d]{1,5})", amountTxt, 5);
+    }//GEN-LAST:event_amountTxtKeyReleased
+
+    private void descriptionTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descriptionTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\w\\s,.]{0,49})", descriptionTxt, 49);
+    }//GEN-LAST:event_descriptionTxtKeyReleased
+
 
     public void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelBtnActionPerformed
         // TODO add your handling code here:
@@ -358,9 +393,13 @@ public class Expences extends javax.swing.JInternalFrame {
 
     public void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
+        if(!eTypeTxt.getText().isEmpty() && !amountTxt.getText().isEmpty()){
         new AddExpenceHm(this);
         ((DefaultTableModel) table.getModel()).setRowCount(0);
         new SetAllTable().setExpenceTable(table);
+        }else{
+            JOptionPane.showMessageDialog(this, "Expence Type and Amount were mandatory fields","Success Park",JOptionPane.ERROR_MESSAGE);
+        }
 
     }// GEN-LAST:event_saveBtnActionPerformed
 
