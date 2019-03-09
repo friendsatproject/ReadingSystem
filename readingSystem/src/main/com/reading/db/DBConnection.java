@@ -2,15 +2,16 @@ package com.reading.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.LinkedHashMap;
+
+import org.hsqldb.server.Server;
 
 public class DBConnection {
 	public Connection getConnection() {
 		try {
 //			Class.forName ("org.h2.Driver");
 			
-		     Class.forName("org.hsqldb.jdbc.JDBCDriver");
-			Connection c = DriverManager.getConnection("jdbc:hsqldb:http://localhost/sp", "SA", "");
+		    Class.forName("org.hsqldb.jdbc.JDBCDriver");
+			Connection c =DriverManager.getConnection("jdbc:hsqldb:file:testdb", "SA", "");
 //			System.out.println(c);
 			
 			return c;
@@ -35,6 +36,20 @@ public class DBConnection {
 //		
 //		new Student().save(lhm);
 //	}
+	public static void main(String[] args) {
+		Server s=new Server();
+		s.main(new String[] {});
+		
+		try {
+			 Class.forName("org.hsqldb.jdbc.JDBCDriver");
+				Connection c =DriverManager.getConnection("jdbc:hsqldb:file:testdb", "SA", "");
+//				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 }
 
 //import java.sql.Connection;

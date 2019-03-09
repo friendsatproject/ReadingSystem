@@ -7,6 +7,7 @@ package com.reading.ui;
 
 import java.awt.Color;
 import java.io.File;
+import java.sql.DriverManager;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -56,9 +57,16 @@ public class LogIn extends javax.swing.JFrame {
 		getContentPane().setBackground(Color.white);
 		String path = homePath + "\\reading\\sp";
 		new File(path).mkdir();
-		String str[] = { "--database.0", path, "--dbname.0", "sp" };
+		String str[] = {};// { "--database.0", path, "--dbname.0", "sp" };
 		new org.hsqldb.server.WebServer();
 		org.hsqldb.server.WebServer.main(str);
+		
+//		try {
+//			 DriverManager.getConnection("jdbc:hsqldb:file:testdb", "SA", "");
+//				
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
 		new CreateTable(new DBConnection().getConnection());
 	}
 
