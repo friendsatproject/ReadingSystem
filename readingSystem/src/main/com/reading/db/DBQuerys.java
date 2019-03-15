@@ -53,15 +53,16 @@ public abstract class DBQuerys {
 		try {
 			StringBuilder sql = new StringBuilder("update " + tableName + " set ");
 			primaryKey = (String) lhm.get("ID");
+			lhm.remove("ID");
 			StringBuilder column = new StringBuilder();
 			String prefix = "";
 			for (String key : lhm.keySet()) {
 				column.append(prefix + key + "=");
-				column.append("'" + lhm.get(key) + "'");
+				column.append("'" + (String) lhm.get(key) + "'");
 				prefix = ",";
 			}
 			sql.append(column);
-			sql.append(" where id='" + lhm.get("ID") + "';");
+			sql.append(" where id='" + primaryKey + "';");
 
 			System.out.println(sql.toString());
 //		update table tname set columnname="" where columnname="" 

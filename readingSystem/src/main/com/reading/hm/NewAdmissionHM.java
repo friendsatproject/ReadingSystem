@@ -68,7 +68,7 @@ public class NewAdmissionHM {
 				hm.put("NUMBER", na.mobileNoTxt.getText());
 
 				saveSms.put("ID", id);
-				saveSms.put("MSG", "Welcome " + na.nameTxt.getText() + " At Sucess Park, ID:" + id + " Fees Paid : "
+				saveSms.put("MSG", "Welcome " + na.nameTxt.getText() + " At Success Park, ID:" + id + " Fees Paid : "
 						+ na.feesPaidTxt.getText());
 				saveSms.put("NUMBER", na.mobileNoTxt.getText());
 				saveSms.put("STATUS", "N");

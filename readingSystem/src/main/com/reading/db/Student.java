@@ -10,18 +10,18 @@ public class Student extends DBQuerys {
 		{
 			put("ID", "char(20) primary key");
 			put("NAME", "char(50)");
-			put("TADDRESS", "char(70)");
-			put("PADDRESS", "char(70)");
+			put("TADDRESS", "char(150)");
+			put("PADDRESS", "char(150)");
 
 			put("ADHAR", "char(12)");
-			put("QUALIFICATION", "char(50)");
+			put("QUALIFICATION", "char(70)");
 			put("GENDER", "char(7)");
 			
 			put("MOBILE", "char(10)");
 			put("ALTERNATEMO", "char(10)");
 			put("PARENTMONO", "char(10)");
 			
-			put("OCCUPATION", "char(20)");
+			put("OCCUPATION", "char(70)");
 
 			put("ADMISSIONTYPE", "char(15)");
 			put("SHIFTTYPE", "char(10)");

@@ -35,14 +35,14 @@ public class FixedFeesHM {
 		hmd.put("HALFYEARLY", s.dsTxt.getText());
 		hmd.put("YEARLY", s.dyTxt.getText());
 
-		hmd.put("ID", "2");
+		hmn.put("ID", "2");
 		hmn.put("TYPE", "N");
 		hmn.put("MONTHLY", s.nmTxt.getText());
 		hmn.put("QUARTERLY", s.ntTxt.getText());
 		hmn.put("HALFYEARLY", s.nsTxt.getText());
 		hmn.put("YEARLY", s.nyTxt.getText());
 
-		hmd.put("ID", "3");
+		hmdn.put("ID", "3");
 		hmdn.put("TYPE", "DN");
 		hmdn.put("MONTHLY", s.dnmTxt.getText());
 		hmdn.put("QUARTERLY", s.dntTxt.getText());

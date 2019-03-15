@@ -132,8 +132,9 @@ public class SetAllTable {
 		try {
 			rs = new FixedFeesDb().getData();
 			while (rs.next()) {
+				System.out.println(rs.getString(2).trim());
 				if (rs.getString(2).trim().equalsIgnoreCase("D")) {
-					// set to lable
+					// set to label
 					s.dmLbl.setText(rs.getString(3).trim());
 					s.dtLbl.setText(rs.getString(4).trim());
 					s.dsLbl.setText(rs.getString(5).trim());
@@ -146,7 +147,7 @@ public class SetAllTable {
 					s.dyTxt.setText(rs.getString(6).trim());
 				}
 				if (rs.getString(2).trim().equalsIgnoreCase("N")) {
-					// set to lable
+					// set to label
 					s.nmLbl.setText(rs.getString(3).trim());
 					s.ntLbl.setText(rs.getString(4).trim());
 					s.nsLbl.setText(rs.getString(5).trim());
@@ -159,7 +160,7 @@ public class SetAllTable {
 					s.nyTxt.setText(rs.getString(6).trim());
 				}
 				if (rs.getString(2).trim().equalsIgnoreCase("DN")) {
-					// set to lable
+					// set to label
 					s.dnmLbl.setText(rs.getString(3).trim());
 					s.dntLbl.setText(rs.getString(4).trim());
 					s.dnsLbl.setText(rs.getString(5).trim());
@@ -284,11 +285,11 @@ public class SetAllTable {
 			StaticMethods.setGender(ssd.maleRdo, ssd.femaleRdo, ssd.otherRdo, rs.getString(7).trim());
 			ssd.mobileNoTxt.setText(rs.getString(8).trim());
 			ssd.alternateMoNoTxt.setText(rs.getString(9).trim());
-			ssd.parentMoNoLbl.setText(rs.getString(10).trim());
+			ssd.parentMoNoTxt.setText(rs.getString(10).trim());
 			ssd.occupationTxt.setText(rs.getString(11).trim());
 			ssd.admissionTypeTxt.setSelectedItem(rs.getString(12).trim());
 			ssd.shiftTypeCmb.setSelectedItem(rs.getString(13).trim());
-//			StaticMethods.setDate(ssd.ddCmb, ssd.mmCmb, ssd.yyyyCmb, rs.getString(14).trim());
+			StaticMethods.setDate(ssd.ddCmb, ssd.mmCmb, ssd.yyyyCmb, rs.getString(14).trim());
 			new ProcessImage().getImage(rs.getString(1).trim(), ssd.updateImageLbl, ssd.showImageLbl);// set image
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -407,6 +408,15 @@ public class SetAllTable {
 			s = "DN";
 			break;
 		case "Night":
+			s = "N";
+			break;
+		case "D":
+			s = "D";
+			break;
+		case "DN":
+			s = "DN";
+			break;
+		case "N":
 			s = "N";
 			break;
 		}

@@ -106,9 +106,9 @@ public class NewAdmission extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel2.setText("Name");
+        jLabel2.setText("Name*");
 
-        jLabel3.setText("Temprary Address");
+        jLabel3.setText("Temprary Address*");
 
         jLabel5.setText("Adhar Number");
 
@@ -134,7 +134,7 @@ public class NewAdmission extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel4.setText("Mobile Number");
+        jLabel4.setText("Mobile Number*");
 
         mobileNoTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -241,7 +241,7 @@ public class NewAdmission extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Total Fees ");
 
-        jLabel11.setText("Paid Fees");
+        jLabel11.setText("Paid Fees*");
 
         feesPaidTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -388,19 +388,17 @@ public class NewAdmission extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(adharTxt)
                             .addComponent(qualificationTxt)
@@ -409,10 +407,11 @@ public class NewAdmission extends javax.swing.JInternalFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
                             .addComponent(jScrollPane2)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel15))
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(parentMoNoTxt)
@@ -472,7 +471,7 @@ public class NewAdmission extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(parentMoNoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -573,12 +572,12 @@ public class NewAdmission extends javax.swing.JInternalFrame {
 
     private void tempAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tempAddressKeyReleased
         // TODO add your handling code here:
-        regx.isValidInput("([\\s\\w,.]{0,49})", tempAddress, 69);
+        regx.isValidInput("([\\s\\w,.]{0,49})", tempAddress, 149);
     }//GEN-LAST:event_tempAddressKeyReleased
 
     private void permenentAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_permenentAddressKeyReleased
         // TODO add your handling code here:
-        regx.isValidInput("([\\s\\w,.]{0,49})", permenentAddress, 69);
+        regx.isValidInput("([\\s\\w,.]{0,49})", permenentAddress, 149);
     }//GEN-LAST:event_permenentAddressKeyReleased
 
     private void adharTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_adharTxtKeyReleased
@@ -588,12 +587,12 @@ public class NewAdmission extends javax.swing.JInternalFrame {
 
     private void qualificationTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_qualificationTxtKeyReleased
         // TODO add your handling code here:
-        regx.isValidInput("([\\s\\w]{0,49})", qualificationTxt, 49);
+        regx.isValidInput("([\\s\\w]{0,49})", qualificationTxt, 69);
     }//GEN-LAST:event_qualificationTxtKeyReleased
 
     private void occupationTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_occupationTxtKeyReleased
         // TODO add your handling code here:
-        regx.isValidInput("([\\s\\w]{0,19})", occupationTxt, 19);
+        regx.isValidInput("([\\s\\w]{0,19})", occupationTxt, 69);
     }//GEN-LAST:event_occupationTxtKeyReleased
 
     private void mobileNoTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mobileNoTxtKeyReleased

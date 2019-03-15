@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import com.reading.db.ExpencesDb;
 import com.reading.operaton.GenerateId;
 import com.reading.ui.Expences;
+import com.reading.ui.Home;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -33,7 +34,7 @@ public class AddExpenceHm {
 		data.put("AMOUNT", ex.amountTxt.getText());
 		data.put("DATE", dt.format(new Date()));
 		data.put("DESCRIPTION", ex.descriptionTxt.getText());
-		data.put("USER", "User");
+		data.put("USER", Home.user);
 		
 //		if(new ExpencesDb().createTable()) {
 //			JOptionPane.showMessageDialog(null, "tableCreated", "", JOptionPane.INFORMATION_MESSAGE);

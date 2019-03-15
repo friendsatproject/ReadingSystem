@@ -16,7 +16,9 @@ public class FindStatus {
 		this.totalFeesPaid = totalFeesPaid;
 		this.admissionType = getType(admissionType);
 		this.joinDate = joinDate;
+		
 		this.totalFees=Integer.parseInt(totalFees);
+		
 	}
 
 	public String getStatus() {

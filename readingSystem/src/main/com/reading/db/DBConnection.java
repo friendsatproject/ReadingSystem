@@ -9,9 +9,9 @@ public class DBConnection {
 	public Connection getConnection() {
 		try {
 //			Class.forName ("org.h2.Driver");
-			
+			String path=System.getProperty("user.home")+"\\reading\\sp\\";
 		    Class.forName("org.hsqldb.jdbc.JDBCDriver");
-			Connection c =DriverManager.getConnection("jdbc:hsqldb:file:testdb", "SA", "");
+			Connection c =DriverManager.getConnection("jdbc:hsqldb:file:"+path+"testdb", "SA", "");
 //			System.out.println(c);
 			
 			return c;

@@ -55,8 +55,8 @@ public class StaticMethods {
 
 	public static void setDate(JComboBox dd, JComboBox mm, JComboBox yy, String date) {
 		dd.setSelectedItem(date.substring(0, 2));
-		mm.setSelectedItem(date.substring(4, 6));
-		yy.setSelectedItem(date.substring(8, 11));
+		mm.setSelectedItem(date.substring(3, 5));
+		yy.setSelectedItem(date.substring(6, 10));
 	}
 
 	public static void setGender(JRadioButton m, JRadioButton f, JRadioButton o, String gender) {

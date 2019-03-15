@@ -11,19 +11,21 @@ public class SetImage {
 	public Image image(String imageName) {
 		cl = getClass().getClassLoader();
 		try {
-			cl.getResource("resources/images/" + imageName).getPath();
-			img = ImageIO.read(cl.getResourceAsStream("resources/images/" + imageName));
+			img = ImageIO.read(getClass().getResource("resources/" + "images/"+imageName));
 			return img;
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
+		
 		try {
-			cl.getResource(imageName).getPath();
-			img = ImageIO.read(cl.getResourceAsStream(imageName));
+			cl.getResource("images/"+imageName).getPath();
+			img = ImageIO.read(cl.getResourceAsStream("images/"+imageName));
 			return img;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return img;
 	}
+
 }

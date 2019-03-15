@@ -7,7 +7,6 @@ package com.reading.ui;
 
 import java.awt.Color;
 import java.io.File;
-import java.sql.DriverManager;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -16,6 +15,7 @@ import com.reading.actionListener.Authenticate;
 import com.reading.db.CreateTable;
 import com.reading.db.DBConnection;
 import com.reading.operaton.IpAddress;
+import com.reading.operaton.processImage.SetImage;
 import com.reading.zip.GenerateZip;
 
 /**
@@ -49,17 +49,18 @@ public class LogIn extends javax.swing.JFrame {
 		initDbOperations();
 		this.setLocationRelativeTo(null);
 		LogIn.t.start();
+		setIconImage(new SetImage().image("book.png"));
 		System.out.println("main Thread running");
 //		new Add1000Records();
 	}
 
 	public void initDbOperations() {
 		getContentPane().setBackground(Color.white);
-		String path = homePath + "\\reading\\sp";
-		new File(path).mkdir();
-		String str[] = {};// { "--database.0", path, "--dbname.0", "sp" };
-		new org.hsqldb.server.WebServer();
-		org.hsqldb.server.WebServer.main(str);
+//		String path = homePath + "\\reading\\sp";
+//		new File(path).mkdir();
+//		String str[] = {};// { "--database.0", path, "--dbname.0", "sp" };
+//		new org.hsqldb.server.WebServer();
+//		org.hsqldb.server.WebServer.main(str);
 		
 //		try {
 //			 DriverManager.getConnection("jdbc:hsqldb:file:testdb", "SA", "");

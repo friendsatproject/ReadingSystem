@@ -22,10 +22,10 @@ public class FixedFeesDb extends DBQuerys {
 		{
 			put("ID", "char(1)");
 			put("TYPE", "char(2)");
-			put("MONTHLY", "char(5)");
-			put("QUARTERLY", "char(5)");
-			put("HALFYEARLY", "char(5)");
-			put("YEARLY", "char(5)");
+			put("MONTHLY", "char(7)");
+			put("QUARTERLY", "char(7)");
+			put("HALFYEARLY", "char(7)");
+			put("YEARLY", "char(7)");
 		}
 	};
 
