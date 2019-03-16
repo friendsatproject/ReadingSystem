@@ -8,7 +8,7 @@ public class UsersDb extends DBQuerys{
 	Connection con=null;
 	LinkedHashMap<String,String> hm=new LinkedHashMap<String,String>(){{
 		put("ID","char(20) primary key");
-		put("PASSWORD","char(20)");
+		put("PASSWORD","char(33)");
 		put("NAME","char(50)");
 		put("ADDRESS","char(50)");
 		put("MOBILE","char(10)");

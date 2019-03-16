@@ -303,6 +303,7 @@ public class SetAllTable {
 			int i = 0;
 			while (rs.next()) {
 				String id = rs.getString(1).trim();
+				System.out.println(id);
 				
 				if (hm.containsKey(id)) {
 //					int oldFees = hm.get(id);
@@ -339,6 +340,7 @@ public class SetAllTable {
 				String ac = rs2.getString(15).trim();
 				name = rs2.getString(2).trim() + " - " + rs2.getString(1).trim();
 				Home.nameCmb.addItem(name);
+				System.out.println((rs2.getString(1).trim()));
 				status = new FindStatus(hm.get(rs2.getString(1).trim()), rs2.getString(12).trim(),
 						rs2.getString(14).trim(), getFees(rs2.getString(12).trim(), rs2.getString(13).trim()))
 								.getStatus();

@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import javax.swing.JOptionPane;
 
 import com.reading.db.UsersDb;
+import com.reading.operaton.Secure;
 import com.reading.ui.SettingsUI;
 
 public class UsersHM {
@@ -13,7 +14,7 @@ public class UsersHM {
 				+ sui.yy.getSelectedItem().toString();
 		LinkedHashMap<String, Object> props = new LinkedHashMap<String, Object>();
 		props.put("ID", sui.uidTxt1.getText());
-		props.put("PASSWORD", sui.passwordTxt1.getText());
+		props.put("PASSWORD",new Secure().secure( sui.passwordTxt1.getText()));
 		props.put("NAME", sui.nameTxt1.getText());
 		props.put("ADDRESS", sui.addressTxt1.getText());
 		props.put("MOBILE", sui.moNoTxt1.getText());
