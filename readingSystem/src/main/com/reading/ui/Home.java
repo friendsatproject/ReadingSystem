@@ -57,8 +57,8 @@ public class Home extends javax.swing.JFrame {
 
 	private void setImgs() {
 		setIconImage(new SetImage().image("images/book.png"));
-		homeLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/home2.png")));
-		banner.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/logo.jpg")));
+//		homeLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/home2.png")));
+//		banner.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/logo.jpg")));
 		utype.setText(Authenticate.usertype);
 	}
 
