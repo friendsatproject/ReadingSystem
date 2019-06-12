@@ -38,7 +38,7 @@ public class ProcessImage {
 		}
 	}
 
-	public void getImage(String id, JLabel label1,JLabel label2) {
+	public void getImage(String id, JLabel label1) {
 
 		try 
 		(Stream<Path> filePathStream=Files.walk(Paths.get(location))) {
@@ -50,7 +50,6 @@ public class ProcessImage {
 		        		Image image = new ImageIcon(filePath.toString()).getImage();
 //						Image newImage = image.getScaledInstance(123, 130, Image.SCALE_DEFAULT);
 		        		label1.setIcon( new ImageIcon(image));
-		        		label2.setIcon( new ImageIcon(image));
 		        	}
 		        }
 		    });

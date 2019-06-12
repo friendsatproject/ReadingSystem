@@ -232,7 +232,9 @@ public class Expences extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(descriptionTxt);
 
+        cancelBtn.setBackground(new java.awt.Color(255, 0, 0));
         cancelBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
         cancelBtn.setText("Cancel");
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,7 +242,9 @@ public class Expences extends javax.swing.JInternalFrame {
             }
         });
 
+        saveBtn.setBackground(new java.awt.Color(0, 153, 51));
         saveBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        saveBtn.setForeground(new java.awt.Color(255, 255, 255));
         saveBtn.setText("Save");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -349,7 +353,11 @@ public class Expences extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if(selectAllRecordCB.isSelected()){
             int rowCount = table.getRowCount();
+            try {
             table.setRowSelectionInterval(0,rowCount-1);
+            }catch(Exception e) {
+            	System.out.println("No rows to selet and deselect in expence table");
+            }
         }else{
         	table.setRowSelectionInterval(0,0);
         }
@@ -382,6 +390,9 @@ public class Expences extends javax.swing.JInternalFrame {
 
     private void descriptionTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descriptionTxtKeyReleased
         // TODO add your handling code here:
+        if(descriptionTxt.getText().length()>50){
+            descriptionTxt.setText(descriptionTxt.getText().substring(0,49));
+        }
         regx.isValidInput("([\\w\\s,.]{0,49})", descriptionTxt, 49);
     }//GEN-LAST:event_descriptionTxtKeyReleased
 
@@ -393,12 +404,13 @@ public class Expences extends javax.swing.JInternalFrame {
 
     public void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
-        if(!eTypeTxt.getText().isEmpty() && !amountTxt.getText().isEmpty()){
+    	boolean et = regx.validateInput("([\\w\\s,.]{1,49})", eTypeTxt,  "Expence type must not be empty should not contain symbols");
+    	boolean ea = regx.validateInput("([\\d]{1,5})", amountTxt,  "Amount must not be empty and can contain only non decimal numbers");
+    	
+        if(et && ea){
         new AddExpenceHm(this);
         ((DefaultTableModel) table.getModel()).setRowCount(0);
         new SetAllTable().setExpenceTable(table);
-        }else{
-            JOptionPane.showMessageDialog(this, "Expence Type and Amount were mandatory fields","Success Park",JOptionPane.ERROR_MESSAGE);
         }
 
     }// GEN-LAST:event_saveBtnActionPerformed

@@ -101,9 +101,9 @@ public class StaticMethods {
 			Date e = sf.parse(evining);
 
 			Date current = new Date();
-			System.out.println(m);
-			System.out.println(e);
-			System.out.println(current);
+//			System.out.println(m);
+//			System.out.println(e);
+//			System.out.println(current);
 			if (current.after(m) && current.before(e)) {
 				result = true;
 			}

@@ -87,7 +87,9 @@ public class NewAdmission extends javax.swing.JInternalFrame {
         imageLbl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+        cancelBtn.setBackground(new java.awt.Color(204, 0, 0));
         cancelBtn.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
         cancelBtn.setText("Cancel");
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +97,9 @@ public class NewAdmission extends javax.swing.JInternalFrame {
             }
         });
 
+        submitBtn.setBackground(new java.awt.Color(0, 102, 0));
         submitBtn.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        submitBtn.setForeground(new java.awt.Color(255, 255, 255));
         submitBtn.setText("Submit");
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +108,6 @@ public class NewAdmission extends javax.swing.JInternalFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel2.setText("Name*");
 
@@ -241,7 +244,7 @@ public class NewAdmission extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Total Fees ");
 
-        jLabel11.setText("Paid Fees*");
+        jLabel11.setText("Fees Paying*");
 
         feesPaidTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -344,7 +347,7 @@ public class NewAdmission extends javax.swing.JInternalFrame {
                         .addComponent(browsImageBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(31, 31, 31)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -471,7 +474,7 @@ public class NewAdmission extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(parentMoNoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -548,10 +551,22 @@ public class NewAdmission extends javax.swing.JInternalFrame {
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
-        if (!nameTxt.getText().isEmpty() && !tempAddress.getText().isEmpty() && !mobileNoTxt.getText().isEmpty() && !feesPaidTxt.getText().isEmpty()) {
+    	//mandatory fields
+    	boolean a1 = regx.validateInput("([a-zA-Z\\s]{3,49})", nameTxt,  "Name can not be empty and it can contain only alphabet charactors");
+    	boolean a2 = regx.validateInput("([\\s\\w,.]{3,149})", tempAddress,  "Temprary Address can not be empty");
+    	boolean a3 = regx.validateInput("([\\d]{10})", mobileNoTxt,  "Mobile number can not be empty and it should contain 10 digits");
+    	boolean a4 = regx.validateInput("([\\d]{1,5})", feesPaidTxt,  "Fees Paid can not Be empty and it shoukd contain only non decimal numeric values");
+    	
+    	//non mandatory fields
+    	boolean a5 = regx.validateInput("([\\s\\w,.]{0,149})", permenentAddress,  "Enter valid Permenent Address");
+    	boolean a6 = regx.validateInput("([\\d]{0,12})", adharTxt,  "Enter valid Adhar number");
+    	boolean a7 = regx.validateInput("([\\s\\w]{0,69})", qualificationTxt,  "Enter valid Qualification, should not contain symbols");
+    	boolean a8 = regx.validateInput("([\\s\\w]{0,69})", occupationTxt, "Enter valid Occupation, should not contain symbols");
+    	boolean a9 = regx.validateInput("([\\d]{0,10})", alternateMoNoTxt, "Alternate mobile number must be 10 digit");
+    	boolean a10 = regx.validateInput("([\\d]{0,10})", parentMoNoTxt, "Parent's mobile number must be 10 digit");
+    	
+        if ( a1 && a2 && a3 && a4 && a5 && a6 && a7 && a8 && a9 && a10) {
             new NewAdmissionHM(this);
-        }else{
-            JOptionPane.showMessageDialog(this, "Name, Address, Mobile Number and Fees Paid are mandatory fields","Success Park",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_submitBtnActionPerformed
 
@@ -572,12 +587,12 @@ public class NewAdmission extends javax.swing.JInternalFrame {
 
     private void tempAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tempAddressKeyReleased
         // TODO add your handling code here:
-        regx.isValidInput("([\\s\\w,.]{0,49})", tempAddress, 149);
+        regx.isValidInput("([\\s\\w,.]{0,149})", tempAddress, 149);
     }//GEN-LAST:event_tempAddressKeyReleased
 
     private void permenentAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_permenentAddressKeyReleased
         // TODO add your handling code here:
-        regx.isValidInput("([\\s\\w,.]{0,49})", permenentAddress, 149);
+        regx.isValidInput("([\\s\\w,.]{0,149})", permenentAddress, 149);
     }//GEN-LAST:event_permenentAddressKeyReleased
 
     private void adharTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_adharTxtKeyReleased
@@ -587,12 +602,12 @@ public class NewAdmission extends javax.swing.JInternalFrame {
 
     private void qualificationTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_qualificationTxtKeyReleased
         // TODO add your handling code here:
-        regx.isValidInput("([\\s\\w]{0,49})", qualificationTxt, 69);
+        regx.isValidInput("([\\s\\w]{0,69})", qualificationTxt, 69);
     }//GEN-LAST:event_qualificationTxtKeyReleased
 
     private void occupationTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_occupationTxtKeyReleased
         // TODO add your handling code here:
-        regx.isValidInput("([\\s\\w]{0,19})", occupationTxt, 69);
+        regx.isValidInput("([\\s\\w]{0,69})", occupationTxt, 69);
     }//GEN-LAST:event_occupationTxtKeyReleased
 
     private void mobileNoTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mobileNoTxtKeyReleased

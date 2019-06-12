@@ -12,12 +12,13 @@ import com.reading.ui.NewAdmission;
 
 public class FeesHM {
 
-    public FeesHM(String amount, String id) {
+    public FeesHM(String amount, String id,String mm) {
         LinkedHashMap<String, Object> props = new LinkedHashMap<String, Object>();
         props.put("ID", id);
         props.put("DATE", new SimpleDateFormat("dd-MM-YYYY").format(new Date()));
         props.put("AMOUNT", amount);
         props.put("RECEIVER", Home.user);
+        props.put("MONTH", mm+"");
 
         if (new FeesDb().save(props)) {
             new ActionTrackerHM("Fees Submited", id);

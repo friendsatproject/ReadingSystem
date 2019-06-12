@@ -11,15 +11,15 @@ public class SetImage {
 	public Image image(String imageName) {
 		cl = getClass().getClassLoader();
 		try {
-			img = ImageIO.read(getClass().getResource("resources/" + "images/"+imageName));
+			img = ImageIO.read(getClass().getResource("resources/" + imageName));
 			return img;
 		} catch (Exception e) {
 //			e.printStackTrace();
 		}
 		
 		try {
-			cl.getResource("images/"+imageName).getPath();
-			img = ImageIO.read(cl.getResourceAsStream("images/"+imageName));
+			cl.getResource(imageName).getPath();
+			img = ImageIO.read(cl.getResourceAsStream(imageName));
 			return img;
 		} catch (Exception e) {
 			e.printStackTrace();

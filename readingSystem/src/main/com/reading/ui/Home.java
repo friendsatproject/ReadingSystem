@@ -10,7 +10,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -32,33 +31,35 @@ public class Home extends javax.swing.JFrame {
 	public JInternalFrame frame2 = new JInternalFrame();
 	public static String user;
 	JInternalFrame frm = new JInternalFrame();
+	JLabel clicked;
+	LogIn login;
 
 	/**
 	 * Creates new form Home
 	 */
 	public Home() {
+
+	}
+
+	public Home(LogIn login) {
+
 		initComponents();
+		this.login = login;
 		this.setExtendedState(this.MAXIMIZED_BOTH);
 		this.getContentPane().setBackground(Color.white);
 		conformCloseSoftware();
 		new SetAllTable().setHomeInfo();
 		new DateTime();
 		new SearchDropdownItem(nameCmb);
-
-		setIconImage(new SetImage().image("book.png"));
-		hideButtons();
+		this.clicked = homeLB;
+		setImgs();
 	}
 
-	public void hideButtons() {
-		
-		if (Authenticate.usertype.equalsIgnoreCase("User")) {
-//			new HideButtons();
-			closeAdmissionBtn.setEnabled(false);
-			traceActionBtn.setEnabled(false);
-			
-			summaryBtn.setEnabled(false);
-			SettingBtn.setEnabled(false);
-		}
+	private void setImgs() {
+		setIconImage(new SetImage().image("images/book.png"));
+		homeLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/home2.png")));
+		banner.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/logo.jpg")));
+		utype.setText(Authenticate.usertype);
 	}
 
 	public void conformCloseSoftware() {
@@ -87,20 +88,29 @@ public class Home extends javax.swing.JFrame {
 		lbl.setForeground(Color.black);
 	}
 
-	private void setMenuButtonColor() {
-		Color color = new Color(255, 255, 255);
-		homeBtn.setBackground(color);
-		newAdmissionBtn.setBackground(color);
-		expenceBtn.setBackground(color);
-		allStudentBtn.setBackground(color);
-		closeAdmissionBtn.setBackground(color);
-		SettingBtn.setBackground(color);
-		traceActionBtn.setBackground(color);
-		summaryBtn.setBackground(color);
+	private void mouseHover(JLabel lbl, String img) {
+		if (!(clicked == lbl)) {
+			lbl.setIcon(new javax.swing.ImageIcon(new SetImage().image(img)));
+		}
 	}
 
-	private void activeMenuButtonColor(JButton btn) {
-		btn.setBackground(new Color(0, 153, 153));
+	private void mouseOut(JLabel lbl, String img) {
+		if (!(clicked == lbl)) {
+			lbl.setIcon(new javax.swing.ImageIcon(new SetImage().image(img)));
+		}
+	}
+
+	private void setAllBtnImages() {
+		// set all images hear
+		homeLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/home1.png")));
+		settingLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/settings1.png")));
+		summaryLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/summary1.png")));
+		logsLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/logs1.png")));
+		closeAdmissionLB
+				.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/closed admission1.png")));
+		ExpencesLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/expences1.png")));
+		allStudentLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/all students1.png")));
+		newAdmissionLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/new admission1.png")));
 	}
 
 	/**
@@ -113,24 +123,21 @@ public class Home extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        newAdmissionBtn = new javax.swing.JButton();
-        allStudentBtn = new javax.swing.JButton();
-        expenceBtn = new javax.swing.JButton();
-        closeAdmissionBtn = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        homeBtn = new javax.swing.JButton();
-        traceActionBtn = new javax.swing.JButton();
-        SettingBtn = new javax.swing.JButton();
-        jPanel14 = new javax.swing.JPanel();
-        dateLbl = new javax.swing.JLabel();
-        timeLbl = new javax.swing.JLabel();
-        summaryBtn = new javax.swing.JButton();
+        settingLB = new javax.swing.JLabel();
+        summaryLB = new javax.swing.JLabel();
+        logsLB = new javax.swing.JLabel();
+        closeAdmissionLB = new javax.swing.JLabel();
+        ExpencesLB = new javax.swing.JLabel();
+        allStudentLB = new javax.swing.JLabel();
+        newAdmissionLB = new javax.swing.JLabel();
+        homeLB = new javax.swing.JLabel();
+        banner = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         windo = new javax.swing.JDesktopPane();
         jPanel4 = new javax.swing.JPanel();
@@ -151,9 +158,10 @@ public class Home extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        expenceLbl = new javax.swing.JLabel();
+        dateLbl = new javax.swing.JLabel();
+        timeLbl = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        utype = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -176,179 +184,151 @@ public class Home extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        newAdmissionBtn.setBackground(new java.awt.Color(255, 255, 255));
-        newAdmissionBtn.setText("New Admission");
-        newAdmissionBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newAdmissionBtnActionPerformed(evt);
+        settingLB.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sawant\\Desktop\\images spa\\btn's\\settings1.png")); // NOI18N
+        settingLB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                settingLBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                settingLBMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                settingLBMousePressed(evt);
             }
         });
 
-        allStudentBtn.setBackground(new java.awt.Color(255, 255, 255));
-        allStudentBtn.setText("All Student");
-        allStudentBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                allStudentBtnActionPerformed(evt);
+        summaryLB.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sawant\\Desktop\\images spa\\btn's\\summary1.png")); // NOI18N
+        summaryLB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                summaryLBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                summaryLBMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                summaryLBMousePressed(evt);
             }
         });
 
-        expenceBtn.setBackground(new java.awt.Color(255, 255, 255));
-        expenceBtn.setText("Expences");
-        expenceBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                expenceBtnActionPerformed(evt);
+        logsLB.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sawant\\Desktop\\images spa\\btn's\\logs1.png")); // NOI18N
+        logsLB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                logsLBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                logsLBMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                logsLBMousePressed(evt);
             }
         });
 
-        closeAdmissionBtn.setBackground(new java.awt.Color(255, 255, 255));
-        closeAdmissionBtn.setText("Closed Admissions");
-        closeAdmissionBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeAdmissionBtnActionPerformed(evt);
+        closeAdmissionLB.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sawant\\Desktop\\images spa\\btn's\\closed admission1.png")); // NOI18N
+        closeAdmissionLB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                closeAdmissionLBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                closeAdmissionLBMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                closeAdmissionLBMousePressed(evt);
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("User name");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("LogIn Time");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        homeBtn.setBackground(new java.awt.Color(0, 153, 153));
-        homeBtn.setText("Home");
-        homeBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                homeBtnActionPerformed(evt);
+        ExpencesLB.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sawant\\Desktop\\images spa\\btn's\\expences1.png")); // NOI18N
+        ExpencesLB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ExpencesLBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ExpencesLBMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ExpencesLBMousePressed(evt);
             }
         });
 
-        traceActionBtn.setBackground(new java.awt.Color(255, 255, 255));
-        traceActionBtn.setText("Trace Action");
-        traceActionBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                traceActionBtnActionPerformed(evt);
+        allStudentLB.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sawant\\Desktop\\images spa\\btn's\\all students1.png")); // NOI18N
+        allStudentLB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                allStudentLBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                allStudentLBMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                allStudentLBMousePressed(evt);
             }
         });
 
-        SettingBtn.setBackground(new java.awt.Color(255, 255, 255));
-        SettingBtn.setText("Settings");
-        SettingBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SettingBtnActionPerformed(evt);
+        newAdmissionLB.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sawant\\Desktop\\images spa\\btn's\\new admission1.png")); // NOI18N
+        newAdmissionLB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                newAdmissionLBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                newAdmissionLBMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                newAdmissionLBMousePressed(evt);
             }
         });
 
-        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        dateLbl.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
-        dateLbl.setForeground(new java.awt.Color(255, 102, 0));
-        dateLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        dateLbl.setText("jLabel23");
-
-        timeLbl.setBackground(new java.awt.Color(0, 102, 102));
-        timeLbl.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
-        timeLbl.setForeground(new java.awt.Color(255, 102, 0));
-        timeLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        timeLbl.setText("jLabel24");
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(timeLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(dateLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(timeLbl)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        summaryBtn.setBackground(new java.awt.Color(255, 255, 255));
-        summaryBtn.setText("Summary");
-        summaryBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                summaryBtnActionPerformed(evt);
+        homeLB.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sawant\\Desktop\\images spa\\btn's\\home1.png")); // NOI18N
+        homeLB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                homeLBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                homeLBMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                homeLBMousePressed(evt);
             }
         });
+
+        banner.setText(" ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(newAdmissionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(allStudentBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                    .addComponent(expenceBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                    .addComponent(closeAdmissionBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(traceActionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SettingBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(summaryBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(settingLB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(summaryLB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logsLB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(closeAdmissionLB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ExpencesLB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(allStudentLB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(newAdmissionLB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(homeLB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(banner))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(homeBtn)
-                .addGap(18, 18, 18)
-                .addComponent(newAdmissionBtn)
-                .addGap(18, 18, 18)
-                .addComponent(allStudentBtn)
-                .addGap(18, 18, 18)
-                .addComponent(expenceBtn)
-                .addGap(18, 18, 18)
-                .addComponent(closeAdmissionBtn)
-                .addGap(18, 18, 18)
-                .addComponent(traceActionBtn)
-                .addGap(18, 18, 18)
-                .addComponent(summaryBtn)
-                .addGap(18, 18, 18)
-                .addComponent(SettingBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(banner, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(homeLB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newAdmissionLB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(allStudentLB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ExpencesLB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(closeAdmissionLB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(logsLB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(summaryLB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(settingLB)
+                .addGap(77, 77, 77))
         );
 
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -425,8 +405,8 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pendingLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addComponent(pendingLbl)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -515,9 +495,9 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(activeLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(activeLbl)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -541,7 +521,12 @@ public class Home extends javax.swing.JFrame {
         jPanel11.setBackground(new java.awt.Color(0, 153, 153));
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 0)));
 
-        jLabel9.setText("View Detail");
+        jLabel9.setText("  LOG OUT");
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel9MousePressed(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel18.setText(">>>");
@@ -553,6 +538,9 @@ public class Home extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jLabel18MouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel18MousePressed(evt);
+            }
         });
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -560,29 +548,35 @@ public class Home extends javax.swing.JFrame {
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel18)
-                .addContainerGap())
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel18))
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jLabel10.setText("Total Amount Of");
+        dateLbl.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
+        dateLbl.setForeground(new java.awt.Color(255, 255, 255));
+        dateLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dateLbl.setText("jLabel23");
 
-        jLabel22.setText("Current Month Expence");
+        timeLbl.setBackground(new java.awt.Color(0, 102, 102));
+        timeLbl.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
+        timeLbl.setForeground(new java.awt.Color(255, 255, 255));
+        timeLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timeLbl.setText("jLabel24");
 
-        expenceLbl.setFont(new java.awt.Font("Jokerman", 1, 24)); // NOI18N
-        expenceLbl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        expenceLbl.setText("0");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("User name");
+
+        utype.setText("utype");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -591,25 +585,29 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(expenceLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(dateLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(timeLbl))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(utype)))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(expenceLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel22)))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(utype))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateLbl)
+                    .addComponent(timeLbl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -717,7 +715,7 @@ public class Home extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -794,14 +792,14 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(windoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(26, 26, 26))
+                .addGap(18, 18, 18))
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         windoLayout.setVerticalGroup(
@@ -809,15 +807,14 @@ public class Home extends javax.swing.JFrame {
             .addGroup(windoLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(windoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(windoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(windoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(450, Short.MAX_VALUE))
+                .addContainerGap(452, Short.MAX_VALUE))
         );
         windo.setLayer(jPanel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         windo.setLayer(jPanel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -835,7 +832,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
@@ -847,16 +844,219 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+		// TODO add your handling code here:
+//		frame.dispose();
+//		frame = new StudentSummaryUI();
+//		windo.add(frame);
+//		frame.setVisible(true);
+////            clicked = summaryLB;
+//		setAllBtnImages();
+	}// GEN-LAST:event_jButton1ActionPerformed
+
+	private void homeLBMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_homeLBMouseEntered
+		// TODO add your handling code here:
+		mouseHover(homeLB, "images/buttons/home2.png");
+	}// GEN-LAST:event_homeLBMouseEntered
+
+	private void homeLBMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_homeLBMouseExited
+		// TODO add your handling code here:
+		mouseOut(homeLB, "images/buttons/home1.png");
+	}// GEN-LAST:event_homeLBMouseExited
+
+	private void homeLBMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_homeLBMousePressed
+		// TODO add your handling code here:
+		frame.dispose();
+		try {
+			frame2.dispose();
+		} catch (Exception e) {
+//			System.out.println("Ignorable NullPointer, second leve frame not found");
+		}
+		clicked = homeLB;
+		setAllBtnImages();
+		homeLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/home2.png")));
+	}// GEN-LAST:event_homeLBMousePressed
+
+	private void settingLBMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_settingLBMouseEntered
+		// TODO add your handling code here:
+		mouseHover(settingLB, "images/buttons/setting2.png");
+	}// GEN-LAST:event_settingLBMouseEntered
+
+	private void settingLBMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_settingLBMouseExited
+		// TODO add your handling code here:
+		mouseOut(settingLB, "images/buttons/settings1.png");
+	}// GEN-LAST:event_settingLBMouseExited
+
+	private void settingLBMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_settingLBMousePressed
+		// TODO add your handling code here:
+		if (Authenticate.usertype.equalsIgnoreCase("Admin")) {
+			frame.dispose();
+			frame = new SettingsUI(this);
+			windo.add(frame);
+			frame.setVisible(true);
+			clicked = settingLB;
+			setAllBtnImages();
+			settingLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/setting2.png")));
+		}
+	}// GEN-LAST:event_settingLBMousePressed
+
+	private void summaryLBMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_summaryLBMouseEntered
+		// TODO add your handling code here:
+		mouseHover(summaryLB, "images/buttons/summary2.png");
+	}// GEN-LAST:event_summaryLBMouseEntered
+
+	private void summaryLBMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_summaryLBMouseExited
+		// TODO add your handling code here:
+		mouseOut(summaryLB, "images/buttons/summary1.png");
+	}// GEN-LAST:event_summaryLBMouseExited
+
+	private void summaryLBMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_summaryLBMousePressed
+		// TODO add your handling code here:
+		if (Authenticate.usertype.equalsIgnoreCase("Admin")) {
+			frame.dispose();
+			frame = new SummaryUi(this);
+			windo.add(frame);
+			frame.setVisible(true);
+			clicked = summaryLB;
+			setAllBtnImages();
+			summaryLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/summary2.png")));
+		}
+	}// GEN-LAST:event_summaryLBMousePressed
+
+	private void logsLBMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_logsLBMouseEntered
+		// TODO add your handling code here:
+		mouseHover(logsLB, "images/buttons/logs2.png");
+	}// GEN-LAST:event_logsLBMouseEntered
+
+	private void logsLBMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_logsLBMouseExited
+		// TODO add your handling code here:
+		mouseOut(logsLB, "images/buttons/logs1.png");
+	}// GEN-LAST:event_logsLBMouseExited
+
+	private void logsLBMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_logsLBMousePressed
+		// TODO add your handling code here:
+		if (Authenticate.usertype.equalsIgnoreCase("Admin")) {
+			frame.dispose();
+			frame = new ActionTracker(this);
+			windo.add(frame);
+			frame.setVisible(true);
+			clicked = logsLB;
+			setAllBtnImages();
+			logsLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/logs2.png")));
+		}
+	}// GEN-LAST:event_logsLBMousePressed
+
+	private void closeAdmissionLBMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_closeAdmissionLBMouseEntered
+		// TODO add your handling code here:
+		mouseHover(closeAdmissionLB, "images/buttons/closed admission2.png");
+	}// GEN-LAST:event_closeAdmissionLBMouseEntered
+
+	private void closeAdmissionLBMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_closeAdmissionLBMouseExited
+		// TODO add your handling code here:
+		mouseOut(closeAdmissionLB, "images/buttons/closed admission1.png");
+	}// GEN-LAST:event_closeAdmissionLBMouseExited
+
+	private void closeAdmissionLBMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_closeAdmissionLBMousePressed
+		// TODO add your handling code here:
+		if (Authenticate.usertype.equalsIgnoreCase("Admin")) {
+			frame.dispose();
+			frame = new ClosedAdmissions(this);
+			windo.add(frame);
+			frame.setVisible(true);
+			clicked = closeAdmissionLB;
+			setAllBtnImages();
+			closeAdmissionLB
+					.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/closed admission2.png")));
+		}
+	}// GEN-LAST:event_closeAdmissionLBMousePressed
+
+	private void ExpencesLBMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_ExpencesLBMouseEntered
+		// TODO add your handling code here:
+		mouseHover(ExpencesLB, "images/buttons/expences2.png");
+	}// GEN-LAST:event_ExpencesLBMouseEntered
+
+	private void ExpencesLBMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_ExpencesLBMouseExited
+		// TODO add your handling code here:
+		mouseOut(ExpencesLB, "images/buttons/expences1.png");
+	}// GEN-LAST:event_ExpencesLBMouseExited
+
+	private void ExpencesLBMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_ExpencesLBMousePressed
+		// TODO add your handling code here:
+		frame.dispose();
+		frame = new Expences(this);
+		windo.add(frame);
+		frame.setVisible(true);
+		clicked = ExpencesLB;
+		setAllBtnImages();
+		ExpencesLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/expences2.png")));
+	}// GEN-LAST:event_ExpencesLBMousePressed
+
+	private void allStudentLBMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_allStudentLBMouseEntered
+		// TODO add your handling code here:
+		mouseHover(allStudentLB, "images/buttons/all students2.png");
+	}// GEN-LAST:event_allStudentLBMouseEntered
+
+	private void allStudentLBMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_allStudentLBMouseExited
+		// TODO add your handling code here:
+		mouseOut(allStudentLB, "images/buttons/all students1.png");
+	}// GEN-LAST:event_allStudentLBMouseExited
+
+	private void allStudentLBMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_allStudentLBMousePressed
+		// TODO add your handling code here:
+		frame.dispose();
+//		frame = new AllStudents(this);
+		frame = new StudentSummaryUI(this);
+		windo.add(frame);
+		frame.setVisible(true);
+		clicked = allStudentLB;
+		setAllBtnImages();
+		allStudentLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/all students2.png")));
+	}// GEN-LAST:event_allStudentLBMousePressed
+
+	private void newAdmissionLBMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_newAdmissionLBMouseEntered
+		// TODO add your handling code here:
+		mouseHover(newAdmissionLB, "images/buttons/new admission2.png");
+	}// GEN-LAST:event_newAdmissionLBMouseEntered
+
+	private void newAdmissionLBMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_newAdmissionLBMouseExited
+		// TODO add your handling code here:
+		mouseOut(newAdmissionLB, "images/buttons/new admission1.png");
+	}// GEN-LAST:event_newAdmissionLBMouseExited
+
+	private void newAdmissionLBMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_newAdmissionLBMousePressed
+		// TODO add your handling code here:
+		frame.dispose();
+		frame = new NewAdmission();
+		windo.add(frame);
+		frame.setVisible(true);
+		clicked = newAdmissionLB;
+		setAllBtnImages();
+		newAdmissionLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/new admission2.png")));
+	}// GEN-LAST:event_newAdmissionLBMousePressed
+
+	private void jLabel9MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel9MousePressed
+		// TODO add your handling code here:
+		this.dispose();
+		login.setVisible(true);
+	}// GEN-LAST:event_jLabel9MousePressed
+
+	private void jLabel18MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel18MousePressed
+		// TODO add your handling code here:
+		this.dispose();
+		login.setVisible(true);
+	}// GEN-LAST:event_jLabel18MousePressed
+
 	private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_searchBtnActionPerformed
 		// TODO add your handling code here:
 		String item = (String) nameCmb.getSelectedItem();
-		String[] arr = item.split("-");
-		String id = arr[1].trim();
-		frm.dispose();
-		frm = new SubmitFeesUI(id);
-		windo.add(frm);
-		frm.setVisible(true);
-
+		if (!(null == item)) {
+			String[] arr = item.split("-");
+			String id = arr[1].trim();
+			frm.dispose();
+			frm = new SubmitFeesUI(id);
+			windo.add(frm);
+			frm.setVisible(true);
+		}
 	}// GEN-LAST:event_searchBtnActionPerformed
 
 	private void jLabel14MouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel14MouseEntered
@@ -910,8 +1110,9 @@ public class Home extends javax.swing.JFrame {
 		frame = as;
 		windo.add(frame);
 		frame.setVisible(true);
-		setMenuButtonColor();
-		activeMenuButtonColor(allStudentBtn);
+		clicked = allStudentLB;
+		setAllBtnImages();
+		allStudentLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/all students2.png"))); // NOI18N
 	}
 
 	private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel14MouseClicked
@@ -930,8 +1131,9 @@ public class Home extends javax.swing.JFrame {
 		frame = as;
 		windo.add(frame);
 		frame.setVisible(true);
-		setMenuButtonColor();
-		activeMenuButtonColor(allStudentBtn);
+		clicked = allStudentLB;
+		setAllBtnImages();
+		allStudentLB.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/all students2.png"))); // NOI18N
 	}
 
 	private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel16MouseClicked
@@ -944,24 +1146,17 @@ public class Home extends javax.swing.JFrame {
 		frame = new ClosedAdmissions(this);
 		windo.add(frame);
 		frame.setVisible(true); // TODO add your handling code here:
-		setMenuButtonColor();
-		activeMenuButtonColor(closeAdmissionBtn);
+		setAllBtnImages();
+
+		closeAdmissionLB
+				.setIcon(new javax.swing.ImageIcon(new SetImage().image("images/buttons/closed admission2.png"))); // NOI18N
+		clicked = closeAdmissionLB;
 	}
 
 	private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel17MouseClicked
 		// TODO add your handling code here:
 		closedStatus();
 	}// GEN-LAST:event_jLabel17MouseClicked
-
-	private void summaryBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_summaryBtnActionPerformed
-		// TODO add your handling code here:
-		frame.dispose();
-		frame = new SummaryUi(this);
-		windo.add(frame);
-		frame.setVisible(true);
-		setMenuButtonColor();
-		activeMenuButtonColor(summaryBtn);
-	}// GEN-LAST:event_summaryBtnActionPerformed
 
 	private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel5MouseClicked
 		// TODO add your handling code here:
@@ -993,96 +1188,20 @@ public class Home extends javax.swing.JFrame {
 		closedStatus();
 	}// GEN-LAST:event_jPanel13MouseClicked
 
-	private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_submitBtnActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_submitBtnActionPerformed
-
-	private void allStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
-		// TODO add your handling code here:
-		frame.dispose();
-		frame = new AllStudents(this);
-		windo.add(frame);
-		frame.setVisible(true);
-		setMenuButtonColor();
-		activeMenuButtonColor(allStudentBtn);
-	}// GEN-LAST:event_jButton3ActionPerformed
-
-	private void expenceBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_expenceBtnActionPerformed
-		frame.dispose();
-		frame = new Expences(this);
-		windo.add(frame);
-		frame.setVisible(true);
-		setMenuButtonColor();
-		activeMenuButtonColor(expenceBtn);
-	}// GEN-LAST:event_expenceBtnActionPerformed
-
-	private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_homeBtnActionPerformed
-		// TODO add your handling code here:
-		frame.dispose();
-		try {
-			frame2.dispose();
-		} catch (Exception e) {
-			System.out.println("Ignorable NullPointer, second leve frame not found");
-		}
-		setMenuButtonColor();
-		activeMenuButtonColor(homeBtn);
-	}// GEN-LAST:event_homeBtnActionPerformed
-
-	private void closeAdmissionBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton5ActionPerformed
-		frame.dispose();
-		frame = new ClosedAdmissions(this);
-		windo.add(frame);
-		frame.setVisible(true); // TODO add your handling code here:
-		setMenuButtonColor();
-		activeMenuButtonColor(closeAdmissionBtn);
-	}// GEN-LAST:event_jButton5ActionPerformed
-
-	private void traceActionBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_actionTrackerBtnActionPerformed
-		// TODO add your handling code here:
-		frame.dispose();
-		frame = new ActionTracker(this);
-		windo.add(frame);
-		frame.setVisible(true);
-		setMenuButtonColor();
-		activeMenuButtonColor(traceActionBtn);
-	}// GEN-LAST:event_actionTrackerBtnActionPerformed
-
-	private void SettingBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SettingBtnActionPerformed
-		// TODO add your handling code here:
-		frame.dispose();
-		frame = new SettingsUI(this);
-		windo.add(frame);
-		frame.setVisible(true);
-		setMenuButtonColor();
-		activeMenuButtonColor(SettingBtn);
-	}// GEN-LAST:event_SettingBtnActionPerformed
-
-	private void newAdmissionBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-		// TODO add your handling code here:
-		frame.dispose();
-		frame = new NewAdmission();
-		windo.add(frame);
-		frame.setVisible(true);
-		setMenuButtonColor();
-		activeMenuButtonColor(newAdmissionBtn);
-	}// GEN-LAST:event_jButton1ActionPerformed
-
 	/**
 	 * @param args the command line arguments
 	 */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton SettingBtn;
+    private javax.swing.JLabel ExpencesLB;
     public static javax.swing.JLabel activeLbl;
-    private javax.swing.JButton allStudentBtn;
-    public static javax.swing.JButton closeAdmissionBtn;
+    private javax.swing.JLabel allStudentLB;
+    private javax.swing.JLabel banner;
+    private javax.swing.JLabel closeAdmissionLB;
     public static javax.swing.JLabel closedLbl;
     public static javax.swing.JLabel dateLbl;
-    private javax.swing.JButton expenceBtn;
-    public static javax.swing.JLabel expenceLbl;
-    private javax.swing.JButton homeBtn;
+    private javax.swing.JLabel homeLB;
     public static javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
@@ -1091,10 +1210,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    public static javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1107,8 +1224,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -1117,13 +1232,15 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel logsLB;
     public static javax.swing.JComboBox nameCmb;
-    private javax.swing.JButton newAdmissionBtn;
+    private javax.swing.JLabel newAdmissionLB;
     public static javax.swing.JLabel pendingLbl;
     private javax.swing.JButton searchBtn;
-    public static javax.swing.JButton summaryBtn;
+    private javax.swing.JLabel settingLB;
+    private javax.swing.JLabel summaryLB;
     public static javax.swing.JLabel timeLbl;
-    public static javax.swing.JButton traceActionBtn;
+    private javax.swing.JLabel utype;
     public javax.swing.JDesktopPane windo;
     // End of variables declaration//GEN-END:variables
 }

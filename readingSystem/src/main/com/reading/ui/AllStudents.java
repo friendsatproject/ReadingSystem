@@ -9,11 +9,9 @@ import javax.swing.table.DefaultTableModel;
 
 import com.reading.db.Student;
 import com.reading.hm.ActionTrackerHM;
-import com.reading.hm.DeleteStudentHM;
 import com.reading.operaton.FormatFrame;
 import com.reading.operaton.SearchTableData;
 import com.reading.operaton.SetAllTable;
-import com.reading.operaton.processImage.ProcessImage;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -58,11 +56,11 @@ public class AllStudents extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        updateBtn = new javax.swing.JButton();
-        deleteBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         searchText = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        deleteBtn = new javax.swing.JButton();
+        updateBtn = new javax.swing.JButton();
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -71,42 +69,53 @@ public class AllStudents extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Sr.No.", " Id", "Name", "Mobile Number", "Gender", "Qualification", "Occupation", "Adhar No.", "Address", "Shift Type", "Fees"
+                "Sr.No.", " Id", "Name", "Mobile Number", "Gender", "Qualification", "Occupation", "Adhar No.", "Address", "Join Date", "Shift Type", "Fees"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        table.setRowHeight(25);
+        table.setRowHeight(22);
         table.setSelectionBackground(new java.awt.Color(255, 153, 0));
         jScrollPane1.setViewportView(table);
         if (table.getColumnModel().getColumnCount() > 0) {
             table.getColumnModel().getColumn(0).setResizable(false);
             table.getColumnModel().getColumn(0).setPreferredWidth(30);
-            table.getColumnModel().getColumn(1).setPreferredWidth(30);
+            table.getColumnModel().getColumn(1).setPreferredWidth(45);
             table.getColumnModel().getColumn(2).setPreferredWidth(200);
             table.getColumnModel().getColumn(3).setPreferredWidth(90);
-            table.getColumnModel().getColumn(4).setPreferredWidth(30);
+            table.getColumnModel().getColumn(4).setPreferredWidth(40);
             table.getColumnModel().getColumn(5).setPreferredWidth(80);
             table.getColumnModel().getColumn(6).setPreferredWidth(80);
             table.getColumnModel().getColumn(7).setPreferredWidth(80);
-            table.getColumnModel().getColumn(8).setPreferredWidth(200);
-            table.getColumnModel().getColumn(9).setPreferredWidth(80);
-            table.getColumnModel().getColumn(10).setPreferredWidth(50);
+            table.getColumnModel().getColumn(8).setPreferredWidth(150);
+            table.getColumnModel().getColumn(10).setPreferredWidth(60);
+            table.getColumnModel().getColumn(11).setPreferredWidth(50);
         }
 
-        updateBtn.setText("Show Details");
-        updateBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateBtnActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1030, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+        );
 
+        jLabel1.setText("Search");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("List Of Student");
+
+        deleteBtn.setBackground(new java.awt.Color(255, 51, 0));
+        deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
         deleteBtn.setText("Delete");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,33 +123,14 @@ public class AllStudents extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1030, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(updateBtn)
-                .addGap(18, 18, 18)
-                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(updateBtn)
-                    .addComponent(deleteBtn))
-                .addContainerGap())
-        );
-
-        jLabel1.setText("Search");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("List Of Student");
+        updateBtn.setBackground(new java.awt.Color(0, 102, 51));
+        updateBtn.setForeground(new java.awt.Color(255, 255, 255));
+        updateBtn.setText("Show Details");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,9 +143,14 @@ public class AllStudents extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2))
-                .addGap(0, 743, Short.MAX_VALUE))
+                        .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,9 +158,13 @@ public class AllStudents extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(updateBtn)
+                        .addComponent(deleteBtn))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

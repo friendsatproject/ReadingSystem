@@ -1,11 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>readingSystem</groupId>
-  <artifactId>readingSystem</artifactId>
+  <groupId>ReadingSystem</groupId>
+  <artifactId>ReadingSystem</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <build>
-    <sourceDirectory>src/main</sourceDirectory>
-   
+    <sourceDirectory>readingSystem/src/main</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>readingSystem/src/main</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -17,8 +24,9 @@
       </plugin>
     </plugins>
   </build>
+  
   <dependencies>
-  <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+   <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 <dependency>
     <groupId>org.apache.poi</groupId>
     <artifactId>poi</artifactId>

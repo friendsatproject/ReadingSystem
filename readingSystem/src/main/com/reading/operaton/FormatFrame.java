@@ -23,14 +23,14 @@ public class FormatFrame {
         BasicInternalFrameUI bi = (BasicInternalFrameUI) frame.getUI();
         bi.setNorthPane(null);
 
-        frame.setBounds(0, 0, (int) width - 195, (int) height - 70);
+        frame.setBounds(0, 0, (int) width - 210, (int) height - 70);
 
         frame.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         frame.getContentPane().setBackground(Color.white);
 
     }
     public void formatUpdateFees(){
-         frame.setBounds(0, 315, (int) width - 195, (int) height - 380);
+         frame.setBounds(0, 290, (int) width - 210, (int) height - 355);
     }
 
     public void formatAddNewExpence() {

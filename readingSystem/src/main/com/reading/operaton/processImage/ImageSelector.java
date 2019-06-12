@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import com.reading.ui.Home;
 
 public class ImageSelector {
-	Home h=new Home ()	;
+	Home h=new Home ();
 	static String photoPath;
 	public ImageSelector(JLabel lbl) {
 	

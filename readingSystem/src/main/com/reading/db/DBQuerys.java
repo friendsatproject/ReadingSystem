@@ -129,11 +129,12 @@ public abstract class DBQuerys {
 		for (String key : data.keySet()) {
 			sql.append(key + "='");
 			sql.append(data.get(key) + "'");
-//			System.out.println(sql);
+//			
 		}
 
 		try {
 			Statement stmt = con.createStatement();
+			System.out.println(sql);
 			ResultSet rs = stmt.executeQuery(sql.toString());
 			con.close();
 			return rs;

@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import com.reading.db.UsersDb;
 import com.reading.operaton.Secure;
+import com.reading.operaton.StaticMethods;
 import com.reading.ui.SettingsUI;
 
 public class UsersHM {
@@ -19,12 +20,8 @@ public class UsersHM {
 		props.put("ADDRESS", sui.addressTxt1.getText());
 		props.put("MOBILE", sui.moNoTxt1.getText());
 		props.put("ALTERNATEMO", sui.ulternateMoNoTxt1.getText());
-		if (sui.male.isSelected())
-			props.put("GENDER", "MALE");
-		if (sui.female.isSelected())
-			props.put("GENDER", "FEMALE");
-		if (sui.other.isSelected())
-			props.put("GENDER", "OTHER");
+		props.put("GENDER", StaticMethods.gender(sui.male, sui.female));
+
 		props.put("ADHAR", sui.adharTxt1.getText());
 		props.put("QUALIFICATION", sui.qualificationTxt1.getText());
 		props.put("OCCUPATION", sui.occupationTxt1.getText());

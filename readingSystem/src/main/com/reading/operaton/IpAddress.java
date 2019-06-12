@@ -8,10 +8,14 @@ public class IpAddress {
 		try {
 			InetAddress localhost = InetAddress.getLocalHost();
 			String addr = localhost.getHostAddress().toString().trim();
-			if(!(new Secure().secure(addr).equals("b1b6c65c705265f91c8d5990a0fd9caf"))){
-				JOptionPane.showMessageDialog(null, "Your Service has been blocked \n Please contact to <sbs.pimpalwadi@gmail.com>", "Access Denied!", JOptionPane.ERROR_MESSAGE);
-				System.exit(0);
-			}
+			System.out.println(addr);
+//			if (!((new Secure().secure(addr).equals("3b0272341a4760a5a1f8ad4ddc98f766"))
+//					|| (new Secure().secure(addr).equals("f528764d624db129b32c21fbca0cb8d6")))) {
+//				JOptionPane.showMessageDialog(null,
+//						"Your Service has been blocked \n Please contact to <sbs.pimpalwadi@gmail.com>",
+//						"Access Denied !", JOptionPane.ERROR_MESSAGE);
+//				System.exit(0);
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

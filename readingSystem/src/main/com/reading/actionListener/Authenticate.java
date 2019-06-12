@@ -27,14 +27,14 @@ public class Authenticate {
 	private void authenticate(HashMap<String, String> hm) {
 		if (new Secure().secure(hm.get("PASSWORD")).equals("6290dc18f00b315c6d02d1bc7cfde9c0")
 				&& new Secure().secure(hm.get("ID")).equals("cc358786cc9889bd690fcf599a71371f")) {
-			new Home().setVisible(true);
+			new Home(login).setVisible(true);
 			Home.jLabel1.setText(hm.get("ID"));
 			SimpleDateFormat sf = new SimpleDateFormat("HH : MM : S a");
-			Home.jLabel2.setText(sf.format(new Date()));
+//			Home.jLabel2.setText(sf.format(new Date()));
 			Home.user = hm.get("ID");
 
 			// send messagae
-			new PrepareForSms();
+//			new PrepareForSms();
 			login.setVisible(false);
 		} else {
 
@@ -45,14 +45,14 @@ public class Authenticate {
 				if (rs.next()) {
 					usertype = rs.getString(13).trim();
 					if (rs.getString(2).trim().equals(new Secure().secure(hm.get("PASSWORD")))) {
-						new Home().setVisible(true);
+						new Home(login).setVisible(true);
 						Home.jLabel1.setText(hm.get("ID"));
 						SimpleDateFormat sf = new SimpleDateFormat("HH : MM : S a");
-						Home.jLabel2.setText(sf.format(new Date()));
+//						Home.jLabel2.setText(sf.format(new Date()));
 						Home.user = hm.get("ID");
 
 						// send messagae
-						new PrepareForSms();
+//						new PrepareForSms();
 						login.setVisible(false);
 					} else {
 						JOptionPane.showMessageDialog(login, "Incorrect UserName or Password", "Success Park",

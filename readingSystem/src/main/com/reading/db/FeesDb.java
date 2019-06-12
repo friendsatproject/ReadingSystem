@@ -15,6 +15,7 @@ public class FeesDb extends DBQuerys {
 			put("DATE", "char(10)");
 			put("AMOUNT", "char(10)");
 			put("RECEIVER", "char(10)");
+			put("MONTH", "char(10)");
 		}
 	};
 

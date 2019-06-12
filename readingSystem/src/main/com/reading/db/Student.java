@@ -8,26 +8,26 @@ public class Student extends DBQuerys {
 	Connection con = null;
 	LinkedHashMap<String, String> hm = new LinkedHashMap<String, String>() {
 		{
-			put("ID", "char(20) primary key");
-			put("NAME", "char(50)");
-			put("TADDRESS", "char(150)");
-			put("PADDRESS", "char(150)");
-
-			put("ADHAR", "char(12)");
-			put("QUALIFICATION", "char(70)");
-			put("GENDER", "char(7)");
+			put("ID", "char(20) primary key");		//1
+			put("NAME", "char(50)");				//2
+			put("TADDRESS", "char(150)");			//3
+			put("PADDRESS", "char(150)");			//4	
 			
-			put("MOBILE", "char(10)");
-			put("ALTERNATEMO", "char(10)");
-			put("PARENTMONO", "char(10)");
+			put("ADHAR", "char(12)");				//5
+			put("QUALIFICATION", "char(70)");		//6
+			put("GENDER", "char(7)");				//7
 			
-			put("OCCUPATION", "char(70)");
+			put("MOBILE", "char(10)");				//8
+			put("ALTERNATEMO", "char(10)");			//9
+			put("PARENTMONO", "char(10)");			//10
+			
+			put("OCCUPATION", "char(70)");			//11
 
-			put("ADMISSIONTYPE", "char(15)");
-			put("SHIFTTYPE", "char(10)");
+			put("ADMISSIONTYPE", "char(15)");		//12
+			put("SHIFTTYPE", "char(10)");			//13
 
-			put("JOINDATE", "char(12)");
-			put("STATUS", "char(7)");
+			put("JOINDATE", "char(12)");			//14
+			put("STATUS", "char(7)");				//15
 			
 		}
 	};

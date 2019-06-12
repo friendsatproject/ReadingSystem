@@ -49,7 +49,7 @@ public class LogIn extends javax.swing.JFrame {
 		initDbOperations();
 		this.setLocationRelativeTo(null);
 		LogIn.t.start();
-		setIconImage(new SetImage().image("book.png"));
+		setIconImage(new SetImage().image("images/book.png"));
 		System.out.println("main Thread running");
 //		new Add1000Records();
 	}
@@ -191,6 +191,7 @@ public class LogIn extends javax.swing.JFrame {
 			HashMap<String, String> hm = new HashMap<String, String>();
 			hm.put("ID", jTextField1.getText());
 			hm.put("PASSWORD", jPasswordField1.getText());
+			jPasswordField1.setText("");
 			new Authenticate(hm, this);
 		} else {
 			JOptionPane.showMessageDialog(this, "Please enter User Name and Password", "Success Park",

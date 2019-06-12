@@ -28,7 +28,7 @@ public class NewAdmissionHM {
 	NewAdmission na;
 
 	public NewAdmissionHM(NewAdmission na) {
-
+		this.na=na;
 		LinkedHashMap<String, Object> fees = new LinkedHashMap<String, Object>();
 		LinkedHashMap<String, Object> props = new LinkedHashMap<String, Object>();
 		String id = GenerateId.getStudentId(na.nameTxt.getText(), na.adharTxt.getText());
@@ -53,15 +53,18 @@ public class NewAdmissionHM {
 		fees.put("DATE", date);
 		fees.put("AMOUNT", na.feesPaidTxt.getText());
 		fees.put("RECEIVER", Home.user);
+		fees.put("MONTH", na.mmCmb.getSelectedItem()+"-"+na.yyyyCmb.getSelectedItem());
 
 		try {
 			if (new Student().save(props) && new FeesDb().save(fees)) {
 
 				new ProcessImage().saveImage(id);// save image to folder
-
+				Home.nameCmb.addItem(props.get("NAME")+"-"+props.get("ID"));
+				Home.activeLbl.setText((Integer.parseInt(Home.activeLbl.getText())+1)+"");
 				new ActionTrackerHM("New student registration done", id);
 				JOptionPane.showMessageDialog(null, "Student registerd  successfully !", "Student Added",
 						JOptionPane.INFORMATION_MESSAGE);
+				makeEmptyFields();
 
 				hm.put("MSG", "Welcome " + na.nameTxt.getText() + " At Sucess Park, ID:" + id + " Fees Paid : "
 						+ na.feesPaidTxt.getText());
@@ -72,7 +75,8 @@ public class NewAdmissionHM {
 						+ na.feesPaidTxt.getText());
 				saveSms.put("NUMBER", na.mobileNoTxt.getText());
 				saveSms.put("STATUS", "N");
-				t.start();
+//				t.start();
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -89,6 +93,18 @@ public class NewAdmissionHM {
 		} else {
 			new SmsDb().save(saveSms);
 		}
+	}
+	private void makeEmptyFields() {
+		na.nameTxt.setText("");
+		na.tempAddress.setText("");
+		na.permenentAddress.setText("");
+		na.adharTxt.setText("");
+		na.qualificationTxt.setText("");
+		na.mobileNoTxt.setText("");
+		na.alternateMoNoTxt.setText("");
+		na.parentMoNoTxt.setText("");
+		na.occupationTxt.setText("");
+		na.feesPaidTxt.setText("");
 	}
 
 }

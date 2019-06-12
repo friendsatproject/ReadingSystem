@@ -21,34 +21,34 @@ public class Sms {
 //        System.out.println(hm.get("msg"));
 //        System.out.println(hm.get("number"));
     	
-         try {
-            // Construct data
-            String apiKey = "apikey=" + "CZO93Uf6t7E-o0Zb0HwUcHqhZM6AnHpeWqr1cnRr3I";
-            String message = "&message=" + hm.get("MSG");
-            String sender = "&sender=" + "";
-            String numbers = "&numbers=" + hm.get("NUMBER");
-
-            // Send data
-            HttpURLConnection conn = (HttpURLConnection) new URL("https://api.textlocal.in/send/?").openConnection();
-            String data = apiKey + numbers + message + sender;
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
-            conn.getOutputStream().write(data.getBytes("UTF-8"));
-            final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            final StringBuffer stringBuffer = new StringBuffer();
-            String line;
-            while ((line = rd.readLine()) != null) {
-                JOptionPane.showMessageDialog(null, "message"+line+"\n","Message Notification",JOptionPane.INFORMATION_MESSAGE);
-            }
-            rd.close();
-
-//			return stringBuffer.toString();
-        } catch (Exception e) {
+//         try {
+//            // Construct data
+//            String apiKey = "apikey=" + "CZO93Uf6t7E-o0Zb0HwUcHqhZM6AnHpeWqr1cnRr3I";
+//            String message = "&message=" + hm.get("MSG");
+//            String sender = "&sender=" + "";
+//            String numbers = "&numbers=" + hm.get("NUMBER");
+//
+//            // Send data
+//            HttpURLConnection conn = (HttpURLConnection) new URL("https://api.textlocal.in/send/?").openConnection();
+//            String data = apiKey + numbers + message + sender;
+//            conn.setDoOutput(true);
+//            conn.setRequestMethod("POST");
+//            conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
+//            conn.getOutputStream().write(data.getBytes("UTF-8"));
+//            final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//            final StringBuffer stringBuffer = new StringBuffer();
+//            String line;
+//            while ((line = rd.readLine()) != null) {
+//                JOptionPane.showMessageDialog(null, "message"+line+"\n","Message Notification",JOptionPane.INFORMATION_MESSAGE);
+//            }
+//            rd.close();
+//
+////			return stringBuffer.toString();
+//        } catch (Exception e) {
 //            System.out.println("Error SMS " + e);
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Message not sent!","Message sending failed",JOptionPane.ERROR_MESSAGE);
-//			return "Error "+e;
-        }
+//            e.printStackTrace();
+//            JOptionPane.showMessageDialog(null, "Message not sent!","Message sending failed",JOptionPane.ERROR_MESSAGE);
+////			return "Error "+e;
+//        }
     }
 }

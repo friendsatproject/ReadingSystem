@@ -9,14 +9,14 @@ public class UsersDb extends DBQuerys{
 	LinkedHashMap<String,String> hm=new LinkedHashMap<String,String>(){{
 		put("ID","char(20) primary key");
 		put("PASSWORD","char(33)");
-		put("NAME","char(50)");
-		put("ADDRESS","char(50)");
+		put("NAME","char(150)");
+		put("ADDRESS","char(150)");
 		put("MOBILE","char(10)");
 		put("ALTERNATEMO","char(10)");
 		put("GENDER","char(6)");
 		put("ADHAR","char(12)");
-		put("QUALIFICATION","char(50)");
-		put("OCCUPATION","char(20)");
+		put("QUALIFICATION","char(150)");
+		put("OCCUPATION","char(120)");
 		put("JOINDATE","char(12)");
 		put("SALLARY","char(6)");
 		put("USERTYPE","char(6)");

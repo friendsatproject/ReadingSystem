@@ -11,7 +11,7 @@ public class ExpencesDb extends DBQuerys{
 		put("EXPENCETYPE","char(50)");
 		put("AMOUNT","char(5)");
 		put("DATE","char(12)");
-		put("DESCRIPTION","char(50)");
+		put("DESCRIPTION","char(150)");
 		put("USER","char(20)");
 		
 	}};

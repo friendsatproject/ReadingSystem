@@ -1,4 +1,5 @@
 /*
+
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -18,6 +19,8 @@ import com.reading.db.Student;
 import com.reading.hm.FeesHM;
 import com.reading.operaton.FormatFrame;
 import com.reading.operaton.SetAllTable;
+import com.reading.regx.RegX;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,8 +28,9 @@ import com.reading.operaton.SetAllTable;
  */
 public class SubmitFeesUI extends javax.swing.JInternalFrame {
 
-    HashMap<String, String> hm=new HashMap<String ,String>();
+    HashMap<String, String> hm = new HashMap<String, String>();
     ResultSet rs;
+    RegX regx = new RegX();
 
     /**
      * Creates new form SubmitFeesUI
@@ -34,9 +38,9 @@ public class SubmitFeesUI extends javax.swing.JInternalFrame {
     public SubmitFeesUI(String id) {
         initComponents();
         hm.put("ID", id);
-       FormatFrame gh = new FormatFrame(this);
-       gh.formatUpdateFees();
-       gh.formatTable(table);
+        FormatFrame gh = new FormatFrame(this);
+        gh.formatUpdateFees();
+        gh.formatTable(table);
         setItems();
     }
 
@@ -47,9 +51,11 @@ public class SubmitFeesUI extends javax.swing.JInternalFrame {
             nameLbl.setText(rs.getString(2).trim());
             idLbl.setText(rs.getString(1).trim());
             mobileLbl.setText(rs.getString(8).trim());
+            joinDateLbl.setText(rs.getString(14).trim());
             rs.close();
-            
+
             new SetAllTable().setFeesTable(table, hm.get("ID"));
+            mm.setSelectedIndex(new Date().getMonth());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,6 +83,10 @@ public class SubmitFeesUI extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        joinDateLbl = new javax.swing.JLabel();
+        mm = new javax.swing.JComboBox();
+        jLabel30 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -100,8 +110,15 @@ public class SubmitFeesUI extends javax.swing.JInternalFrame {
 
         amountTxt.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         amountTxt.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        amountTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                amountTxtKeyReleased(evt);
+            }
+        });
 
+        submitBtn.setBackground(new java.awt.Color(0, 153, 51));
         submitBtn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        submitBtn.setForeground(new java.awt.Color(255, 255, 255));
         submitBtn.setText("Submit Fees");
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,42 +149,60 @@ public class SubmitFeesUI extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Submit Student Fees Form");
 
+        jLabel2.setText("Join Date  :  ");
+
+        joinDateLbl.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        joinDateLbl.setText("jLabel28");
+
+        mm.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        mm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan-2019", "Feb-2019", "Mar-2019", "Apr-2019", "May-2019", "Jun-2019", "Jul-2019", "Aug-2019", "Sep-2019", "Oct-2019", "Nov-2019", "Dec-2019", " " }));
+
+        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel30.setText("Fees For Month");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel25)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(idLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel25)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(idLbl)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                                .addComponent(jLabel23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nameLbl)
+                                .addGap(151, 151, 151)
+                                .addComponent(jLabel27)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(mobileLbl))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel29)
+                                        .addGap(107, 107, 107)
+                                        .addComponent(jLabel30))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(amountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(amountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(23, 23, 23)
-                                        .addComponent(jLabel23)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(40, 40, 40)
-                                        .addComponent(jLabel27)
+                                        .addComponent(mm, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(mobileLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                        .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(102, 102, 102)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(joinDateLbl)))
+                .addGap(91, 91, 91))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,15 +216,20 @@ public class SubmitFeesUI extends javax.swing.JInternalFrame {
                     .addComponent(jLabel25)
                     .addComponent(idLbl)
                     .addComponent(jLabel27)
-                    .addComponent(mobileLbl))
-                .addGap(18, 18, 18)
+                    .addComponent(mobileLbl)
+                    .addComponent(jLabel2)
+                    .addComponent(joinDateLbl))
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
+                    .addComponent(jLabel30))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(amountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -208,26 +248,44 @@ public class SubmitFeesUI extends javax.swing.JInternalFrame {
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
-        new FeesHM(amountTxt.getText(),idLbl.getText());
-        ((DefaultTableModel) table.getModel()).addRow(new Object[] {
-            ((DefaultTableModel) table.getModel()).getRowCount()+1, new SimpleDateFormat("dd-MM-YYYY").format(new Date()),
-            amountTxt.getText(), Home.user});
-        LinkedHashMap<String,Object> lhm = new LinkedHashMap<String ,Object>();
-        lhm.put("ID", idLbl.getText());
-        new SmsDb().delete(lhm);
+        boolean input = regx.validateInput("([\\d]{1,5})", amountTxt, "Wrong input , only non decimal numeric values allowed ! ");
+        if (input) {
+        	String[] y= mm.getSelectedItem().toString().split("-");
+            new FeesHM(amountTxt.getText(), idLbl.getText(),mm.getSelectedIndex()+1+"-"+y[1]);
+            ((DefaultTableModel) table.getModel()).addRow(new Object[]{
+                ((DefaultTableModel) table.getModel()).getRowCount() + 1, new SimpleDateFormat("dd-MM-YYYY").format(new Date()),
+                amountTxt.getText(), Home.user});
+            LinkedHashMap<String, Object> lhm = new LinkedHashMap<String, Object>();
+            lhm.put("ID", idLbl.getText());
+//            new SmsDb().delete(lhm);
+            amountTxt.setText("");
+        }
+//        else{
+//            JOptionPane.showMessageDialog(this, "Wrong input , only non decimal numeric values allowed ! ",
+//					"Failed to submit", JOptionPane.ERROR_MESSAGE);
+//        }
     }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void amountTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amountTxtKeyReleased
+        // TODO add your handling code here:
+        regx.isValidInput("([\\d]{1,5})", amountTxt, 5);
+    }//GEN-LAST:event_amountTxtKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField amountTxt;
     private javax.swing.JLabel idLbl;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel joinDateLbl;
+    private javax.swing.JComboBox mm;
     private javax.swing.JLabel mobileLbl;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JButton submitBtn;
